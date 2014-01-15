@@ -1,0 +1,18 @@
+#fee-container
+	%h2
+		Reporting Interface
+	%h3	
+		View Clinic Submissions
+	.clinic-select
+		= collection_select(:membership_fee, :clinic_id, @clinics, :id, :name, include_blank: 'Please Select your Clinic')
+		= link_to "run", "javascript:doClinicReport();", id: "clinic-link"
+		
+	%h3
+		View Submissions by Month
+	.date-select	
+		= select('month', 'id', @months)
+		= select('year', 'id', @years)
+		= link_to "run", "javascript:doDateReport()", id: "date-link"
+		
+		
+	

@@ -1,0 +1,10 @@
+- if @mode == "clinic"
+	%h3 Clinic Report for #{@clinic.name}
+	= link_to "Export to CSV", "/reports/show.csv?mode=clinic&clinic=" + @clinic.id.to_s
+	= render partial: "feetable", :locals => {:feeArray => @memeber_fees}
+	= link_to "Export to CSV", "/reports/show.csv?mode=clinic&clinic=" + @clinic.id.to_s
+- else
+	%h3 Report for #{@month}, #{@year}
+	= link_to "Export to CSV", "/reports/show.csv/month=" + @month + "&year=" + @year
+	= render partial: "feetable", :locals => {:feeArray => @memeber_fees}
+	= link_to "Export to CSV", "/reports/show.csv/month=" + @month + "&year=" + @year

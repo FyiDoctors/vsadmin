@@ -1,0 +1,212 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ *= require jquery-ui/ui-lightness
+ */
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+@media print {
+    .print-hidden { display: none }
+}
+
+.header {
+	width: 500px;
+	margin: 0 auto;
+	background: url(/assets/logo.png) no-repeat;
+	background-size: Auto 40px;
+	height: 40px;
+	position: relative;
+	padding-bottom: 20px;
+}
+
+.canada-label {
+	position: absolute;
+	top: 34px;
+	left: 175px;
+	font-size: 10px;
+}
+#login-title {
+	padding-left: 40px;
+	width: 360px;
+	margin: 0 auto;
+	font-size: 18px;
+	text-align: center;
+}
+
+#secret-container {
+	background-color: #ECECEC;
+	border: 1px solid #ABABAB;
+	width: 300px;
+	height: 150px;
+    left:50%;
+    top:50%;
+	position: absolute;
+    margin:-75px 0 0 -150px;
+	border-radius: 20px;
+	padding: 20px;
+	text-align: center;
+	font-size: 18px;
+}
+
+#security_secret {
+	margin-top: 20px;
+	width: 200px;
+	height: 30px;
+	font-size: 18px;
+	text-align: center;
+}
+
+#fee-container {
+	width: 500px;
+	margin: 0 auto;
+}
+.fee-data {
+	padding-top: 15px;
+	border-top: 1px solid #ABABAB;
+}
+
+.exclusions {
+	padding-left: 40px;
+	
+}
+div.field {
+	margin-bottom: 2px;
+}
+
+.minus {
+	background: url(/assets/minus.png) no-repeat;
+	height: 15px;
+	width: 16px;
+	float: left;
+	margin-right: 20px;
+}
+
+#adjusted-receipts {
+	width: 100px;
+	text-align: right;
+}
+
+#membership-fee {
+	width: 100px;
+	float: left;
+	text-align: right;
+}
+
+.fee-td {
+	width: 200px;
+}
+
+#adjust-link {
+	width: 70px;
+	float: right;
+}
+label{
+  width: 4em;
+  float: left;
+  text-align: left;
+  margin-right: 2em;
+  display: block
+}
+.padded-label {
+  margin-right: 6.5em;
+	
+}
+input {
+	width: 100px;
+}
+.finance-table label {
+	width: 180px;
+}
+.indent30 {
+	padding-left: 30px;
+}
+.bold {
+	font-weight: bold;
+}
+.underline {
+	border-bottom: 1px solid #ababab;
+}
+.actions {
+	padding-top: 30px;
+	float: right;
+}
+.hidden {
+	display: none;
+}
+
+#left-table {
+	float: left;
+}
+#right-table {
+	float: right;	
+}
+
+.fee-table {
+	margin-top: 20px;
+	width: 240px;
+	border: 1px solid #ececec;
+}
+.fee-table .fee-header {
+	background-color: #ECECEC;
+}
+.fee-table td {
+	font-size: 10px;
+	border: 1px solid #ececec;
+}
+
+.fee-table .double  {
+	border-bottom: 1px solid white !important;
+	border-top: 1px solid white !important;
+}
+
+.fee-table .title {
+	text-align: center;
+}
+
+.numeric-display {
+	text-align: right;
+}
+.rowOn {
+	background-color: #bec7ed;
+}
+
+.money-input {
+	text-align: right;
+}
+
+
+
+#clinicReport {
+	
+}
+#clinicReport td {
+	padding-left: 20px;
+	padding-right: 5px;
+	border: 1px solid #ababab;
+}
+
+.report-header {
+	font-weight: bold;
+	background-color: #ececec;
+}

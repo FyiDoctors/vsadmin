@@ -1,0 +1,40 @@
+%table#clinicReport{:cellpadding=>0, :cellspacing=>0}
+	%tr
+		%td.report-header
+			Month
+		%td.report-header
+			Year
+		%td.report-header
+			Receipts
+		%td.report-header
+			Credit Card
+		%td.report-header
+			Refunds
+		%td.report-header
+			Tax
+		%td.report-header
+			Fee
+		%td.report-header
+			Check Number
+		%td
+
+	- feeArray.each do |fee|
+		%tr
+			%td
+				= fee.month 
+			%td
+				= fee.year			
+			%td
+				= number_with_precision(fee.receipts, precision: 2)			
+			%td
+				= number_with_precision(fee.creditcard, precision: 2)
+			%td
+				= number_with_precision(fee.refunds, precision: 2)
+			%td
+				= number_with_precision(fee.tax, precision: 2)				
+			%td
+				= number_with_precision(fee.fee, precision: 2)
+			%td
+				= number_with_precision(fee.checknumber, precision: 2)
+			%td
+				= link_to "View", "/membership_fees/" + fee.id.to_s

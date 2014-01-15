@@ -1,0 +1,64 @@
+#fee-container
+	%h1 Membership Fees
+
+	%h3 Please enter the following data to compute the montly membership fee due. 
+	- if @membership_fee.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@membership_fee.errors.count, "error")} prohibited this membership_fee from being saved:"
+			%ul
+				- @membership_fee.errors.full_messages.each do |msg|
+					%li= msg
+	.field
+		Receipt Number: 
+		%span.bold
+			= "00" + @membership_fee.id.to_s
+	.field.bold
+		= @membership_fee.clinic.name
+	.field
+		Check Number: &nbsp;
+		%span.bold
+			= @membership_fee.checknumber
+	.field
+		For Month: &nbsp;
+		%span.bold
+			= @membership_fee.month.to_s + ", " + @membership_fee.year.to_s
+
+	.fee-data
+		%table.finance-table
+			%tr
+				%td
+					Receipts
+				%td.numeric-display
+					= number_to_currency(@membership_fee.receipts)
+			%tr
+				%td.indent30
+					.minus
+					Credit Card Processing Fee
+				%td.numeric-display
+					= number_to_currency(@membership_fee.creditcard)
+			%tr
+				%td.indent30
+					.minus
+					Refunds to Patients
+				%td.numeric-display
+					= number_to_currency(@membership_fee.refunds)
+			%tr
+				%td.indent30
+					.minus
+					Sales Tax Paid by Patient
+				%td.numeric-display
+					= number_to_currency(@membership_fee.tax)
+			%tr
+				%td.underline
+					Adjusted Gross Receipts
+				%td.underline.numeric-display
+					= number_to_currency(@membership_fee.receipts - @membership_fee.creditcard - @membership_fee.refunds - @membership_fee.tax)
+			%tr
+				%td.bold
+					Membership Fee Due
+				%td
+					#membership-fee.bold
+						= number_to_currency(@membership_fee.fee)
+	%br
+	%br
+	=link_to "Print Page", "javascript:window.print();return false;", :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"

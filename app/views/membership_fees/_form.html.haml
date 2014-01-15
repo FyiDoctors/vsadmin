@@ -1,0 +1,66 @@
+#fee-container
+	%h1 Membership Fees
+
+	%h3 Please enter the following data to compute the montly membership fee due. 
+	= form_for @membership_fee do |f|
+		- if @membership_fee.errors.any?
+			#error_explanation
+				%h2= "#{pluralize(@membership_fee.errors.count, "error")} prohibited this membership_fee from being saved:"
+				%ul
+					- @membership_fee.errors.full_messages.each do |msg|
+						%li= msg
+		.field
+			= f.label :clinic, :class=>"padded-label"
+			= collection_select(:membership_fee, :clinic_id, @clinics, :id, :name, include_blank: 'Please Select your Clinic')
+		.field
+			= f.label :checknumber, :class=>"padded-label"
+			= f.text_field :checknumber
+		.field
+			= f.label :month, :class=>"padded-label"
+			= f.select :month, @months
+			= f.select :year, @years, :selected=>"2014"
+
+		.fee-data
+			%table.finance-table
+				%tr
+					%td
+						= f.label :receipts
+					%td
+						= f.text_field :receipts, :class=>"money-input"
+				%tr
+					%td.indent30
+						.minus
+						= f.label :creditcard, "Credit Card Processing Fee"
+					%td
+						= f.text_field :creditcard, :class=>"money-input"
+				%tr
+					%td.indent30
+						.minus
+						= f.label :refunds, "Refunds to Patients"
+					%td
+						= f.text_field :refunds, :class=>"money-input"
+				%tr
+					%td.indent30
+						.minus
+						= f.label :tax, "Sales Tax Paid by Patient"
+					%td
+						= f.text_field :tax, :class=>"money-input"
+				%tr
+					%td.underline
+						Adjusted Gross Receipts
+					%td.underline
+						#adjusted-receipts
+							0.00
+				%tr
+					%td.bold
+						Membership Fee Due
+					%td.fee-td
+						#membership-fee.bold
+							0.00
+						#adjust-link
+							=link_to "Override", "#", id: "override-link"
+						= f.text_field :fee, :class=>"money-input", :class=>"money-input hidden"
+				
+		= f.submit 'Submit Fees', :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+
+	= render partial: "fees"	

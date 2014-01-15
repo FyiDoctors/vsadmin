@@ -1,0 +1,21 @@
+%h1 Listing securities
+
+%table
+  %tr
+    %th Secret
+    %th
+    %th
+    %th
+    %th
+
+  - @securities.each do |security|
+    %tr
+      %td= security.secret
+      %td= security.role
+      %td= link_to 'Show', security
+      %td= link_to 'Edit', edit_security_path(security)
+      %td= link_to 'Destroy', security, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Security', new_security_path

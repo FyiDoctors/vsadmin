@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  receipts: 9.99
+  creditcard: 9.99
+  refunds: 9.99
+  tax: 9.99
+  month: MyString
+  checknumber: 1
+
+two:
+  receipts: 9.99
+  creditcard: 9.99
+  refunds: 9.99
+  tax: 9.99
+  month: MyString
+  checknumber: 1

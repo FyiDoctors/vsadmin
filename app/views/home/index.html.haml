@@ -1,0 +1,10 @@
+= form_for @security do |f|
+	#login-title
+		Membership Fee Portal
+	#secret-container
+		Please enter site password
+	
+		.field
+			= f.password_field :secret
+		.actions
+			= f.submit 'Enter'
