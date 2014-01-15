@@ -1,6 +1,6 @@
 class SecuritiesController < ApplicationController
   before_action :set_security, only: [:show, :edit, :update, :destroy]
-  before_action :validate_user
+
 
   # GET /securities
   # GET /securities.json
@@ -26,7 +26,7 @@ class SecuritiesController < ApplicationController
   # POST /securities.json
   def create
     @security = Security.new(params[:security].permit(:secret))
-    logger.debug(@security.secret)
+    logger.debug("SECRET" + @security.secret)
     @membershipFee = MembershipFee.new
     @security_key = Security.find_by_secret(@security.secret)
     respond_to do |format|
@@ -78,16 +78,5 @@ class SecuritiesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def security_params
       params.require(:security).permit(:secret)
-    end
-    def validate_user
-      logged_in = session[:logged_in]
-      logger.debug("validate user")
-      if logged_in == nil || logged_in != "admin"
-        redirect_to "/admin.html"
-        return false
-      else
-        logger.debug("session: " + logged_in)
-      end
-      return true
     end
 end
