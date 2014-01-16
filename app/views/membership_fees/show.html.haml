@@ -1,7 +1,18 @@
 .fee-container
-	%h1 Membership Fees
+	%h3 Thank you for submitting you member data. 
 
-	%h3 Please enter the following data to compute the montly membership fee due. 
+	%p Cheques should be made payable to Vision Source Canada. Please print this page and include it with your cheque and send to the address below. Payment is due 45 days after month-end. 
+	%p
+		%span.bold	
+			Send to:
+		%br
+		250, 1167 Kensington Crescent NW
+		%br
+		Calgary, AB, Canada
+		%br
+		T2N 1X7
+		(403) 234 2020
+	%hr	
 	- if @membership_fee.errors.any?
 		#error_explanation
 			%h2= "#{pluralize(@membership_fee.errors.count, "error")} prohibited this membership_fee from being saved:"
