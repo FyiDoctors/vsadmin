@@ -75,13 +75,16 @@ function processFees() {
 
 	aReceipts = (receipts-card-refund-tax);
 	$('#adjusted-receipts').text(aReceipts.toFixed(2));
+	console.log("Do highlight")
 	for( var i=0; i<fees.length; i++ ){
+		console.log(fees[i])
 		if (aReceipts >= fees[i].from && aReceipts < fees[i].to) {
 			$("#membership-fee").text(fees[i].fee);	
 			$('#membership_fee_fee').val(fees[i].fee);		
-			$("#fee-row-" + selectedIndex).removeClass("rowOn");
-			selectedIndex = i+1;
-			$("#fee-row-" + selectedIndex).addClass("rowOn");
+			$("#fee-row-" + fees[selectedIndex].id).removeClass("rowOn");
+			selectedIndex = i;
+			$("#fee-row-" + fees[selectedIndex].id).addClass("rowOn");
+d
 			break;
 		}
 	}
@@ -104,40 +107,41 @@ function processOverride() {
 		if (i < fees.length-1) {
 			console.log("from fees: "+fees[i].fee + " to " + fees[i+1].fee)
 			if (overrideValue == parseInt(fees[i].fee)) {
-				$("#membership-fee").text(fees[i].fee);			
-				$("#fee-row-" + selectedIndex).removeClass("rowOn");
-				$("#fee-row-" + overrideRow1).removeClass("rowOn");
-				$("#fee-row-" + overrideRow2).removeClass("rowOn");
-				selectedIndex = i+1;
-				overrideRow1 = i+1;
-				overrideRow2 = i+1;
-				$("#fee-row-" + overrideRow1 ).addClass("rowOn");
+				$("#membership-fee").text(fees[i].fee);		
+				console.debug("HERE" + overrideRow1)	
+				$("#fee-row-" + fees[selectedIndex].id).removeClass("rowOn");
+				$("#fee-row-" + fees[overrideRow1].id).removeClass("rowOn");
+				$("#fee-row-" + fees[overrideRow2].id).removeClass("rowOn");
+				selectedIndex = i;
+				overrideRow1 = i;
+				overrideRow2 = i;
+				$("#fee-row-" + fees[overrideRow1].id ).addClass("rowOn");
 				break;			
 			}
 			else if (overrideValue > parseInt(fees[i].fee) && overrideValue < parseInt(fees[i+1].fee)) {
 				$("#membership-fee").text(fees[i].fee);			
-				$("#fee-row-" + selectedIndex).removeClass("rowOn");
-				$("#fee-row-" + overrideRow1).removeClass("rowOn");
-				$("#fee-row-" + overrideRow2).removeClass("rowOn");
-				selectedIndex = i+1;
-				overrideRow1 = i+1;
-				overrideRow2 = i+2;
+				$("#fee-row-" + fees[selectedIndex].id).removeClass("rowOn");
+				$("#fee-row-" + fees[overrideRow1].id).removeClass("rowOn");
+				$("#fee-row-" + fees[overrideRow2].id).removeClass("rowOn");
+				selectedIndex = i;
+				overrideRow1 = i;
+				overrideRow2 = i+1;
 			
 				console.log("VAL: " + overrideValue);
-				$("#fee-row-" + overrideRow1 ).addClass("rowOn");
-				$("#fee-row-" + overrideRow2 ).addClass("rowOn");
+				$("#fee-row-" + fees[overrideRow1].id ).addClass("rowOn");
+				$("#fee-row-" + fees[overrideRow2].id ).addClass("rowOn");
 				break;
 			}
 		}
 		else {
 			console.log("last one");
-			$("#fee-row-" + selectedIndex).removeClass("rowOn");
-			$("#fee-row-" + overrideRow1).removeClass("rowOn");
-			$("#fee-row-" + overrideRow2).removeClass("rowOn");		
+			$("#fee-row-" + fees[selectedIndex].id).removeClass("rowOn");
+			$("#fee-row-" + fees[overrideRow1].id).removeClass("rowOn");
+			$("#fee-row-" + fees[overrideRow2].id).removeClass("rowOn");		
 			selectedIndex = 0;
 			overrideRow1 = fees.length;
 			overrideRow2 = 0;
-			$("#fee-row-" + overrideRow1 ).addClass("rowOn");
+			$("#fee-row-" + fees[overrideRow1].id ).addClass("rowOn");
 			return;
 		}
 	}
