@@ -13,7 +13,7 @@
  *= require jquery-ui/ui-lightness
  */
 body {
-  background-color: #fff;
+  background-color: #ececec;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -38,6 +38,7 @@ p, ol, ul, td {
 	height: 40px;
 	position: relative;
 	padding-bottom: 20px;
+	color: #FFF;
 }
 
 .canada-label {
@@ -55,7 +56,7 @@ p, ol, ul, td {
 }
 
 #secret-container {
-	background-color: #ECECEC;
+	background-color: #FFF;
 	border: 1px solid #ABABAB;
 	width: 300px;
 	height: 150px;
@@ -67,6 +68,7 @@ p, ol, ul, td {
 	padding: 20px;
 	text-align: center;
 	font-size: 18px;
+	border: 4px solid gray;
 }
 
 #security_secret {
@@ -77,9 +79,22 @@ p, ol, ul, td {
 	text-align: center;
 }
 
-#fee-container {
+.fee-container {
+	border-radius: 20px 20px 0 0;
+	height: 100%;
 	width: 500px;
 	margin: 0 auto;
+	background-color: #FFF;
+	padding: 10px;
+}
+
+.report-container {
+	height: 100%;
+	width: 100%;
+	margin: 0 auto;
+	background-color: #FFF;
+	padding: 20px;
+	
 }
 .fee-data {
 	padding-top: 15px;
@@ -162,10 +177,15 @@ input {
 	float: right;	
 }
 
+.fee-table-container {
+	background-color: #FFF;
+	height: 350px;
+}
 .fee-table {
 	margin-top: 20px;
 	width: 240px;
 	border: 1px solid #ececec;
+	background-color: #FFF;
 }
 .fee-table .fee-header {
 	background-color: #ECECEC;

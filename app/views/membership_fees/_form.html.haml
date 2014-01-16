@@ -1,4 +1,4 @@
-#fee-container
+.fee-container
 	%h1 Membership Fees
 
 	%h3 Please enter the following data to compute the montly membership fee due. 
@@ -58,9 +58,10 @@
 						#membership-fee.bold
 							0.00
 						#adjust-link
-							=link_to "Override", "#", id: "override-link"
+							=link_to "Override", "#", id: "override-link", :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
 						= f.text_field :fee, :class=>"money-input", :class=>"money-input hidden"
-				
-		= f.submit 'Submit Fees', :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-
+		%br		
+		= f.submit 'Submit Fees', :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only", :style=>"width: 200px;"
+	%h3 
+		Fee Schedule
 	= render partial: "fees"	

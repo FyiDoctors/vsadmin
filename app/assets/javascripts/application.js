@@ -22,6 +22,9 @@ var overrideRow1 = 0;
 var overrideRow2 = 0;
 
 $(document).ready(function() {
+	$.backstretch("/assets/stairs.jpg");
+	
+	
 	$('#membership_fee_receipts').numeric();
 	$('#membership_fee_creditcard').numeric();
 	$('#membership_fee_refunds').numeric();

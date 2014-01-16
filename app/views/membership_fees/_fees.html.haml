@@ -1,63 +1,64 @@
-#left-table
-	%table.fee-table{:cellpadding=>0, :cellspacing=>0}
-		%tr.fee-header
-			%td.title.double{:colspan=>2}
-				Franchisee's
-			%td.title.double
-				Montly
-		%tr.fee-header
-			%td.title.double{:colspan=>2}
-				Montly Gross Receipts
-			%td.title.double
-				Membership
-		%tr.fee-header
-			%td.title
-				At Least
-			%td.title
-				But Less Than
-			%td.title
-				Fee
-		- @count = 0
-		- @fees.each do |fee|
-			- if @count <= 10
-				%tr{:id => "fee-row-" + fee.id.to_s}
-					%td
-						=number_to_currency( fee.from )
-					%td
-						= number_to_currency(fee.to)
-					%td
-						= number_to_currency(fee.fee)
-			-@count = @count + 1						
-#right-table
-	%table.fee-table{:cellpadding=>0, :cellspacing=>0}
-		%tr.fee-header
-			%td.title.double{:colspan=>2}
-				Franchisee's
-			%td.title.double
-				Montly
-		%tr.fee-header
-			%td.title.double{:colspan=>2}
-				Montly Gross Receipts
-			%td.title.double
-				Membership
-		%tr.fee-header
-			%td.title
-				At Least
-			%td.title
-				But Less Than
-			%td.title
-				Fee
-		- @count = 0
-		- @fees.each do |fee|
-			- if @count > 10
-				%tr{:id => "fee-row-" + fee.id.to_s}
-					%td
-						=number_to_currency( fee.from )
-					%td
-						= number_to_currency(fee.to)
-					%td
-						= number_to_currency(fee.fee)
-			-@count = @count + 1						
+.fee-table-container
+	#left-table
+		%table.fee-table{:cellpadding=>0, :cellspacing=>0}
+			%tr.fee-header
+				%td.title.double{:colspan=>2}
+					Franchisee's
+				%td.title.double
+					Montly
+			%tr.fee-header
+				%td.title.double{:colspan=>2}
+					Montly Gross Receipts
+				%td.title.double
+					Membership
+			%tr.fee-header
+				%td.title
+					At Least
+				%td.title
+					But Less Than
+				%td.title
+					Fee
+			- @count = 0
+			- @fees.each do |fee|
+				- if @count <= 10
+					%tr{:id => "fee-row-" + fee.id.to_s}
+						%td
+							=number_to_currency( fee.from )
+						%td
+							= number_to_currency(fee.to)
+						%td
+							= number_to_currency(fee.fee)
+				-@count = @count + 1						
+	#right-table
+		%table.fee-table{:cellpadding=>0, :cellspacing=>0}
+			%tr.fee-header
+				%td.title.double{:colspan=>2}
+					Franchisee's
+				%td.title.double
+					Montly
+			%tr.fee-header
+				%td.title.double{:colspan=>2}
+					Montly Gross Receipts
+				%td.title.double
+					Membership
+			%tr.fee-header
+				%td.title
+					At Least
+				%td.title
+					But Less Than
+				%td.title
+					Fee
+			- @count = 0
+			- @fees.each do |fee|
+				- if @count > 10
+					%tr{:id => "fee-row-" + fee.id.to_s}
+						%td
+							=number_to_currency( fee.from )
+						%td
+							= number_to_currency(fee.to)
+						%td
+							= number_to_currency(fee.fee)
+				-@count = @count + 1						
 
-%br
-%br
+	%br
+	%br
