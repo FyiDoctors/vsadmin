@@ -1,6 +1,6 @@
 class ClinicsController < ApplicationController
   before_action :set_clinic, only: [:show, :edit, :update, :destroy]
-  before_action :validate_user
+  #before_action :validate_user
 
   # GET /clinics
   # GET /clinics.json

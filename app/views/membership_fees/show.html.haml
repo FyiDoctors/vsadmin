@@ -1,4 +1,4 @@
-#fee-container
+.fee-container
 	%h1 Membership Fees
 
 	%h3 Please enter the following data to compute the montly membership fee due. 
@@ -14,6 +14,10 @@
 			= "00" + @membership_fee.id.to_s
 	.field.bold
 		= @membership_fee.clinic.name
+	.field
+		Vendor Id: 
+		%span.bold
+			= @membership_fee.clinic.vendorid
 	.field
 		Check Number: &nbsp;
 		%span.bold
@@ -61,4 +65,4 @@
 						= number_to_currency(@membership_fee.fee)
 	%br
 	%br
-	=link_to "Print Page", "javascript:window.print();return false;", :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+	=link_to "Print Page", "javascript:window.print();return false;", :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only print-hidden"

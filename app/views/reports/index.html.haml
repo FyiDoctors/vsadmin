@@ -4,7 +4,9 @@
 	%h3	
 		View Clinic Submissions
 	.clinic-select
-		= collection_select(:membership_fee, :clinic_id, @clinics, :id, :name, include_blank: 'Please Select your Clinic')
+		= autocomplete_field_tag "name", "", autocomplete_clinic_name_membership_fees_path, :id_element=>"#clinicid", :style=>"width: 200px;", :autofocus => true
+		Type to search
+		= text_field_tag "clinicid", nil, :id=>"clinicid", :style=>"display: none"
 		= link_to "run", "javascript:doClinicReport();", id: "clinic-link"
 		
 	%h3

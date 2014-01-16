@@ -1,4 +1,5 @@
 class ReportsController < ApplicationController
+  autocomplete :clinic, :name, :full => true
   before_action :validate_user
 
   def index

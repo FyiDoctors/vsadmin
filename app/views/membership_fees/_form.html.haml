@@ -11,10 +11,12 @@
 						%li= msg
 		.field
 			= f.label :clinic, :class=>"padded-label"
-			= collection_select(:membership_fee, :clinic_id, @clinics, :id, :name, include_blank: 'Please Select your Clinic')
+			= f.autocomplete_field :clinic, autocomplete_clinic_name_membership_fees_path, :id_element=>"#membership_fee_clinic_id", :autofocus => true, :style=>"width: 200px"
+			Type to search
+			= f.hidden_field :clinic_id
 		.field
 			= f.label :checknumber, :class=>"padded-label"
-			= f.text_field :checknumber
+			= f.text_field :checknumber, :style=>"width: 200px"
 		.field
 			= f.label :month, :class=>"padded-label"
 			= f.select :month, @months

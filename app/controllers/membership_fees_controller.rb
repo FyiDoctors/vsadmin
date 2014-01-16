@@ -1,5 +1,5 @@
 class MembershipFeesController < ApplicationController
-  autocomplete :clinic, :name
+  autocomplete :clinic, :name, :full => true
   before_action :set_membership_fee, only: [:show, :edit, :update, :destroy]
   before_action :validate_user
   

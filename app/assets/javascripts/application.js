@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require turbolinks
 //= require_tree .
 //= require autocomplete-rails
@@ -153,7 +154,7 @@ $(document).ready(function() {
 
 function doClinicReport() {
 	console.log("here");
-	clinicId = $('#membership_fee_clinic_id').find(":selected").val();
+	clinicId = $('#clinicid').val();
 	if (clinicId > 0) {	
 		window.location = "/reports/show?mode=clinic&clinic="+clinicId;
 	} else {
