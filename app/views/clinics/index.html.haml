@@ -4,6 +4,7 @@
   %tr
     %th Name
     %th Doctor
+    %th Address
     %th
     %th
     %th
@@ -12,6 +13,7 @@
     %tr
       %td= clinic.name
       %td= clinic.doctor
+      %td= clinic.address
       %td= link_to 'Show', clinic
       %td= link_to 'Edit', edit_clinic_path(clinic)
       %td= link_to 'Destroy', clinic, :method => :delete, :data => { :confirm => 'Are you sure?' }

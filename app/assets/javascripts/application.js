@@ -22,9 +22,9 @@ var selectedIndex = 0;
 var overrideRow1 = 0;
 var overrideRow2 = 0;
 
+
 $(document).ready(function() {
-	$.backstretch("/assets/stairs.jpg");
-	
+	var clinics;
 	
 	$('#membership_fee_receipts').numeric();
 	$('#membership_fee_creditcard').numeric();
@@ -63,7 +63,40 @@ $(document).ready(function() {
 	    success: function(data){
 			fees=data;
 	    }
+	  });	
+	
+	$.ajax({
+	    type: "GET",
+	    url: "/clinics",    
+	    dataType: "json",
+	    success: function(data){
+			clinics=data;
+		    var obj = clinics;
+			for (var i = 0; i<obj.length; i++) {
+			    obj[i].label = obj[i].name;
+			    obj[i].clinic_id = obj[i].id;
+			    delete obj[i].name;
+			    delete obj[i].id;
+				delete obj[i].url;
+				delete obj[i].doctor;
+			}
+			$( "#membership_fee_clinic" ).autocomplete({
+			      minLength: 0,
+			      source: obj,
+				select: function( event, ui ) {
+					$("#membership_fee_clinic_id").val(ui.item.clinic_id);
+					$( "#membership_fee_clinic" ).val( ui.item.label );					
+				 }
+			})
+			.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+			      return $( "<li>" )
+			        .append( "<a>" + item.label + "<br><span style='font-size: 10px'>" + item.address + "</span></a>" )
+			        .appendTo( ul );
+			};
+
+	    }
 	  });
+
 });
 
 function processFees() {
@@ -84,7 +117,7 @@ function processFees() {
 			$("#fee-row-" + fees[selectedIndex].id).removeClass("rowOn");
 			selectedIndex = i;
 			$("#fee-row-" + fees[selectedIndex].id).addClass("rowOn");
-d
+			
 			break;
 		}
 	}

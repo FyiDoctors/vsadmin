@@ -1,7 +1,11 @@
 .fee-container
 	%h3 Thank you for submitting you member data. 
 
-	%p Cheques should be made payable to Vision Source Canada. Please print this page and include it with your cheque and send to the address below. Payment is due 45 days after month-end. 
+	%p 
+		Cheques should be made payable to Vision Source Canada. Please include your confirmation number 
+		%span.bold
+			[VS-00#{@membership_fee.id}]
+		on your check. Payment is due 30 days after month-end. We also recommend printing a copy of this confirmation receipt for your records.
 	%p
 		%span.bold	
 			Send to:
@@ -20,11 +24,13 @@
 				- @membership_fee.errors.full_messages.each do |msg|
 					%li= msg
 	.field
-		Receipt Number: 
+		Confirmation Number: 
 		%span.bold
-			= "00" + @membership_fee.id.to_s
+			= "VS-00" + @membership_fee.id.to_s
 	.field.bold
 		= @membership_fee.clinic.name
+	.field{:style=>"font-size:10px; padding-left: 10px"}
+		= @membership_fee.clinic.address
 	.field
 		Vendor Id: 
 		%span.bold
