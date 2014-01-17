@@ -22,55 +22,15 @@ var selectedIndex = 0;
 var overrideRow1 = 0;
 var overrideRow2 = 0;
 
+history.navigationMode = 'compatible';
 
 $(document).ready(function() {
-	var clinics;
-	
-	$('#membership_fee_receipts').numeric();
-	$('#membership_fee_creditcard').numeric();
-	$('#membership_fee_refunds').numeric();
-	$('#membership_fee_tax').numeric();
 
-	$('#membership_fee_receipts').keyup(function(e){
-			processFees();
-	});
-	$('#membership_fee_creditcard').keyup(function(e){
-			processFees();
-	});
-	$('#membership_fee_refunds').keyup(function(e){
-			processFees();
-	});
-	$('#membership_fee_tax').keyup(function(e){
-			processFees();
-	});
-	$('#year_id').change(function (e) {
-		updateMonthLink();
-	})
-	$('#month_id').change(function (e) {
-		updateMonthLink();
-	})
-	$('#override-link').click(function(e) {
-		$('#override-link').hide();
-		$('#membership-fee').hide();
-		$('#membership_fee_fee').show();
-		$('#membership_fee_fee').val($("#membership-fee").text());
-		
-		return false;
-	})
-
-	$('#membership_fee_fee').keyup(function(e){
-		processOverride();
-	});
-	
-	$.ajax({
-	    type: "GET",
-	    url: "/fees",    
-	    dataType: "json",
-	    success: function(data){
-			fees=data;
-	    }
-	  });
 });
+
+function validateFrom() {
+	return false;
+}
 
 function processFees() {
 	var fee = 0;
@@ -181,3 +141,4 @@ function updateMonthLink() {
 function doDateReport() {
 		window.location = "/reports/show?mode=date&month="+month+"&year="+year	
 }
+

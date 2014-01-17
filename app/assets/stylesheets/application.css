@@ -185,6 +185,18 @@ input {
 #left-table {
 	float: left;
 }
+
+#error_explanation {
+	font-size: 10px;
+	border: 1px solid #ABABAB;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 10px	;
+}
+#error_explanation h2 {
+	color: red;
+	font-size: 10px;
+}
 #right-table {
 	float: right;	
 }

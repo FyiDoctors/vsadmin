@@ -1,7 +1,8 @@
 class MembershipFee < ActiveRecord::Base
   belongs_to :clinic
   before_save :default_values
-
+  validates :clinic_id, presence: true
+  
   def clinic_name 
     clinic.name if clinic
   end

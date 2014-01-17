@@ -32,6 +32,10 @@
 	.field{:style=>"font-size:10px; padding-left: 10px"}
 		= @membership_fee.clinic.address
 	.field
+		Vision Source Location Id: 
+		%span.bold
+			= @membership_fee.clinic.vsid
+	.field
 		Vendor Id: 
 		%span.bold
 			= @membership_fee.clinic.vendorid
@@ -83,3 +87,4 @@
 	%br
 	%br
 	=link_to "Print Page", "javascript:window.print();return false;", :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only print-hidden"
+	=link_to "Enter Another", "/membership_fees/new", :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only print-hidden"
