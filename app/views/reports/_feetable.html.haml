@@ -1,9 +1,11 @@
 %table#clinicReport{:cellpadding=>0, :cellspacing=>0}
 	%tr
 		%td.report-header
+			Vendor Id
+		%td.report-header
 			Clinic
 		%td.report-header
-			Vendor Id
+			Address
 		%td.report-header
 			Month
 		%td.report-header
@@ -28,6 +30,8 @@
 				= fee.clinic.vendorid
 			%td
 				= fee.clinic.name
+			%td
+				= fee.clinic.address
 			%td
 				= fee.month 
 			%td

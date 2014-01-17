@@ -4,9 +4,9 @@
 	%h3	
 		View Clinic Submissions
 	.clinic-select
-		= autocomplete_field_tag "name", "", autocomplete_clinic_name_membership_fees_path, :id_element=>"#clinicid", :style=>"width: 200px;", :autofocus => true
+		= text_field_tag "clinic_name", nil, :id=>"membership_fee_clinic", :style=>"width: 200px;", :autofocus => true
 		Type to search
-		= text_field_tag "clinicid", nil, :id=>"clinicid", :style=>"display: none"
+		= text_field_tag "clinicid", nil, :id=>"membership_fee_clinic_id", :style=>"display: none"
 		= link_to "run", "javascript:doClinicReport();", id: "clinic-link"
 		
 	%h3

@@ -191,7 +191,7 @@ $(document).ready(function() {
 
 function doClinicReport() {
 	console.log("here");
-	clinicId = $('#clinicid').val();
+	clinicId = $('#membership_fee_clinic_id').val();
 	if (clinicId > 0) {	
 		window.location = "/reports/show?mode=clinic&clinic="+clinicId;
 	} else {

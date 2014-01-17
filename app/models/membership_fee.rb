@@ -9,10 +9,10 @@ class MembershipFee < ActiveRecord::Base
   def self.to_csv
     CSV.generate do |csv|
 #      csv << column_names
-      csv << ["Submit Id", "Clinic Name", "Vendor Id", "Month", "Year", "Credit Card", "Refunds", "Tax", "Fees", "Check Number"]
+      csv << ["Submit Id", "Vendor Id","Clinic Name", "Address", "Month", "Year", "Credit Card", "Refunds", "Tax", "Fees", "Check Number"]
       all.each do |fee|
 #        csv << fee.attributes.values_at(*column_names)
-        csv << [fee.id, fee.clinic.name, fee.clinic.vendorid, fee.month, fee.year, fee.creditcard, fee.refunds, fee.tax, fee.fee, fee.checknumber]
+        csv << [fee.id, fee.clinic.vendorid, fee.clinic.name, fee.clinic.address, fee.month, fee.year, fee.creditcard, fee.refunds, fee.tax, fee.fee, fee.checknumber]
       end
     end
   end
