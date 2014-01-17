@@ -43,6 +43,12 @@ $(document).ready(function() {
 	$('#membership_fee_tax').keyup(function(e){
 			processFees();
 	});
+	$('#year_id').change(function (e) {
+		updateMonthLink();
+	})
+	$('#month_id').change(function (e) {
+		updateMonthLink();
+	})
 	$('#override-link').click(function(e) {
 		$('#override-link').hide();
 		$('#membership-fee').hide();
@@ -63,40 +69,7 @@ $(document).ready(function() {
 	    success: function(data){
 			fees=data;
 	    }
-	  });	
-	
-	$.ajax({
-	    type: "GET",
-	    url: "/clinics",    
-	    dataType: "json",
-	    success: function(data){
-			clinics=data;
-		    var obj = clinics;
-			for (var i = 0; i<obj.length; i++) {
-			    obj[i].label = obj[i].name;
-			    obj[i].clinic_id = obj[i].id;
-			    delete obj[i].name;
-			    delete obj[i].id;
-				delete obj[i].url;
-				delete obj[i].doctor;
-			}
-			$( "#membership_fee_clinic" ).autocomplete({
-			      minLength: 0,
-			      source: obj,
-				select: function( event, ui ) {
-					$("#membership_fee_clinic_id").val(ui.item.clinic_id);
-					$( "#membership_fee_clinic" ).val( ui.item.label );					
-				 }
-			})
-			.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-			      return $( "<li>" )
-			        .append( "<a>" + item.label + "<br><span style='font-size: 10px'>" + item.address + "</span></a>" )
-			        .appendTo( ul );
-			};
-
-	    }
 	  });
-
 });
 
 function processFees() {
@@ -199,10 +172,12 @@ function doClinicReport() {
 	}
 	
 }
+function updateMonthLink() {
+	month = $('#month_id').find(":selected").val();
+	year = $('#year_id').find(":selected").val();
+	$("#date-link").attr("href", "/reports/show?mode=date&month="+month+"&year="+year);
+}
 
 function doDateReport() {
-		console.log("here2");
-		month = $('#month_id').find(":selected").val();
-		year = $('#year_id').find(":selected").val();
 		window.location = "/reports/show?mode=date&month="+month+"&year="+year	
 }

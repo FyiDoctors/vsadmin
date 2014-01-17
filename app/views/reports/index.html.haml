@@ -7,14 +7,15 @@
 		= text_field_tag "clinic_name", nil, :id=>"membership_fee_clinic", :style=>"width: 200px;", :autofocus => true
 		Type to search
 		= text_field_tag "clinicid", nil, :id=>"membership_fee_clinic_id", :style=>"display: none"
-		= link_to "run", "javascript:doClinicReport();", id: "clinic-link"
+		= link_to "run", "javascript:alert('Make sure you select a clinic.')", id: "clinic-link"
 		
 	%h3
 		View Submissions by Month
 	.date-select	
 		= select('month', 'id', @months)
 		= select('year', 'id', @years)
-		= link_to "run", "javascript:doDateReport()", id: "date-link"
+		
+		= link_to "run", "/reports/show?mode=date&month="+@months[0]+"&year="+@years[0], id: "date-link"
 		
 		
 	
