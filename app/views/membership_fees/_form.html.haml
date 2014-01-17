@@ -11,7 +11,7 @@
 						%li= msg
 		.field
 			= f.label :clinic, :class=>"padded-label"
-			= f.text_field :clinic, :style=>"width: 200px;"
+			= f.text_field :clinic, :style=>"width: 200px;", :autofocus => true
 			Type to search
 			= f.hidden_field :clinic_id
 		.field.hidden
