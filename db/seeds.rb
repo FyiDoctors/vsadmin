@@ -23,7 +23,7 @@ fee = Fee.create([ from: "150000", to: "175000", fee: "1625.00", model_id: 1])
 fee = Fee.create([ from: "175000", to: "200000", fee: "1875.00", model_id: 1])
 fee = Fee.create([ from: "200000", to: "225000", fee: "2125.00", model_id: 1])
 
-fee = Fee.create([ from: "0", to: "10000", fee: "78.00", model_id: 2])
+fee = Fee.create([ from: "0", to: "10000", fee: "75.00", model_id: 2])
 fee = Fee.create([ from: "11000", to: "30000", fee: "300.00", model_id: 2])
 fee = Fee.create([ from: "30000", to: "50000", fee: "600.00", model_id: 2])
 fee = Fee.create([ from: "50000", to: "70000", fee: "900.00", model_id: 2])
