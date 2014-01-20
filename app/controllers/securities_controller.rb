@@ -39,7 +39,7 @@ class SecuritiesController < ApplicationController
           format.html { redirect_to reports_path}
         end
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to root_path }
         format.json { render json: @security.errors, status: :unprocessable_entity }
       end
     end

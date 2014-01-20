@@ -132,6 +132,9 @@
 							$("#clinic-display-box").show();
 							$("#clinic-display").text(ui.item.label);
 							$("#clinic-select").hide();
+							
+							$("#membership_fee_month").focus();
+							
 							processFees();
 						} else {
 							$("#clinic-link").attr("href", "javascript:alert('Make sure you select a clinic.')");

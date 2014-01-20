@@ -67,11 +67,14 @@ p, ol, ul, td {
 	color: #FFF;
 }
 
+#login-notes {
+	font-size: 10px;
+}
 #secret-container {
 	background-color: #FFF;
 	border: 1px solid #ABABAB;
 	width: 300px;
-	height: 150px;
+	height: 220px;
     left:50%;
     top:50%;
 	position: absolute;

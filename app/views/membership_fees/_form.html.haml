@@ -42,19 +42,19 @@
 					%td
 						= f.text_field :receipts, :class=>"money-input"
 				%tr
-					%td.indent30
+					%td.indent30#cc-lbl
 						.minus
 						= f.label :creditcard, "Credit Card Processing Fee"
 					%td
 						= f.text_field :creditcard, :class=>"money-input"
 				%tr
-					%td.indent30
+					%td.indent30#ref-lbl
 						.minus
 						= f.label :refunds, "Refunds to Patients"
 					%td
 						= f.text_field :refunds, :class=>"money-input"
 				%tr
-					%td.indent30
+					%td.indent30#tax-lbl
 						.minus
 						= f.label :tax, "Sales Tax Paid by Patient"
 					%td
@@ -78,5 +78,5 @@
 		= f.submit 'Submit Fees', :id=>"saveButton", :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only", :style=>"width: 200px;"
 	%h3 
 		Fee Schedule
-	= render partial: "fees", :locals => {:fees => @feesA, :display=>"block", :id=>1}	
-	= render partial: "fees", :locals => {:fees => @feesB, :display=>"none", :id=>2}	
+	= render partial: "fees", :locals => {:fees => @feesA, :display=>"none", :id=>1}	
+	= render partial: "fees", :locals => {:fees => @feesB, :display=>"block", :id=>2}	
