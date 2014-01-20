@@ -1,9 +1,10 @@
 %table#clinicReport{:cellpadding=>0, :cellspacing=>0}
 	%tr
+		%td
 		%td.report-header
 			Vendor Id
 		%td.report-header
-			Vision Source Id
+			VS Id
 		%td.report-header
 			Clinic
 		%td.report-header
@@ -22,10 +23,13 @@
 			Tax
 		%td.report-header
 			Fee
-		%td
+		%td.report-header
+			Date Received
 
 	- feeArray.each do |fee|
 		%tr
+			%td
+				= link_to "View", "/membership_fees/" + fee.id.to_s
 			%td
 				= fee.clinic.vendorid
 			%td
@@ -49,4 +53,4 @@
 			%td
 				= number_with_precision(fee.fee, precision: 2)
 			%td
-				= link_to "View", "/membership_fees/" + fee.id.to_s
+				= fee.created_at
