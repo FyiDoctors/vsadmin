@@ -17,7 +17,8 @@ class MembershipFeesController < ApplicationController
     @clinics = Clinic.all
     @months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     @years = ["2013", "2014"]
-    @fees = Fee.all;
+    @feesA = Fee.where(:model_id => 1)
+    @feesB = Fee.where(:model_id => 2)
   end
 
   # GET /membership_fees/1/edit
@@ -31,8 +32,8 @@ class MembershipFeesController < ApplicationController
     @clinics = Clinic.all
     @months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     @years = ["2013", "2014"]
-    @fees = Fee.all;
-
+    @feesA = Fee.where(:model_id => 1)
+    @feesB = Fee.where(:model_id => 2)
     
     respond_to do |format|
       if @membership_fee.save

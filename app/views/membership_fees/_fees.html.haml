@@ -1,4 +1,4 @@
-.fee-table-container
+.fee-table-container{:id=>"fee_table_#{id}", :style=>"display: #{display}"}
 	#left-table
 		%table.fee-table{:cellpadding=>0, :cellspacing=>0}
 			%tr.fee-header
@@ -19,9 +19,9 @@
 				%td.title
 					Fee
 			- @count = 0
-			- @fees.each do |fee|
+			- fees.each do |fee|
 				- if @count <= 10
-					%tr{:id => "fee-row-" + fee.id.to_s}
+					%tr{:id => "fee-row-" + fee.model_id.to_s + "-" + fee.id.to_s}
 						%td
 							=number_to_currency( fee.from )
 						%td
@@ -49,9 +49,9 @@
 				%td.title
 					Fee
 			- @count = 0
-			- @fees.each do |fee|
+			- fees.each do |fee|
 				- if @count > 10
-					%tr{:id => "fee-row-" + fee.id.to_s}
+					%tr{:id => "fee-row-" + fee.model_id.to_s + "-" + fee.id.to_s}
 						%td
 							=number_to_currency( fee.from )
 						%td

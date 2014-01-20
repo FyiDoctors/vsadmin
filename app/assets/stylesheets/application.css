@@ -111,6 +111,19 @@ p, ol, ul, td {
 .fee-data {
 	padding-top: 15px;
 	border-top: 1px solid #ABABAB;
+	position: relative;
+}
+.fee-overlay {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 500px;
+	height: 175px;
+	background-color: #000;
+	opacity: .5;
+	text-align: center;
+	color: #FFF;
+	font-size: 22px;
 }
 
 .exclusions {
@@ -254,4 +267,21 @@ input {
 .report-header {
 	font-weight: bold;
 	background-color: #ececec;
+}
+
+#clinic-display-box {
+    display: inline-block;
+}
+#clinic-display {
+	padding-right: 5px	;
+}
+.change-button {
+	margin-top: 2px;
+	opacity: .7;
+	background: url(/assets/x-close.jpeg) no-repeat;
+	background-size: 16px 16px;
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	float: right;
 }

@@ -11,9 +11,17 @@
 						%li= msg
 		.field
 			= f.label :clinic, :class=>"padded-label"
-			= f.text_field :clinic, :style=>"width: 200px;", :autofocus => true
-			Type to search
+			%span#clinic-select
+				= f.text_field :clinic, :style=>"width: 200px;", :autofocus => true
+				Type to search
+			%span#change-link
+			#clinic-display-box
+				%span#clinic-display
+					Test Clinic 1
+				#change-button.change-button
+				%br
 			= f.hidden_field :clinic_id
+			
 		.field.hidden
 			= f.label :checknumber, :class=>"padded-label"
 			= f.text_field :checknumber, :style=>"width: 200px"
@@ -23,6 +31,10 @@
 			= f.select :year, @years, :selected=>"2014"
 
 		.fee-data
+			.fee-overlay
+				%br
+				%br
+				You must select a clinic first
 			%table.finance-table
 				%tr
 					%td
@@ -66,4 +78,5 @@
 		= f.submit 'Submit Fees', :id=>"saveButton", :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only", :style=>"width: 200px;"
 	%h3 
 		Fee Schedule
-	= render partial: "fees"	
+	= render partial: "fees", :locals => {:fees => @feesA, :display=>"block", :id=>1}	
+	= render partial: "fees", :locals => {:fees => @feesB, :display=>"none", :id=>2}	

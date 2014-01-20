@@ -17,6 +17,8 @@
 //= require_tree .
 //= require autocomplete-rails
 
+var fees_1;
+var fees_2;
 var fees;
 var selectedIndex = 0;
 var overrideRow1 = 0;
@@ -39,17 +41,18 @@ function processFees() {
 	refund = ($('#membership_fee_refunds').val()) == "" ? 0 : parseInt($('#membership_fee_refunds').val())
 	tax = ($('#membership_fee_tax').val()) == "" ? 0 : parseInt($('#membership_fee_tax').val())
 
-	aReceipts = (receipts-card-refund-tax);
-	$('#adjusted-receipts').text(aReceipts.toFixed(2));
-	console.log("Do highlight")
+	var aReceipts = (receipts-card-refund-tax);
+	if( isNaN(aReceipts) )
+		$('#adjusted-receipts').text("0.00")
+	else
+		$('#adjusted-receipts').text(aReceipts.toFixed(2));
 	for( var i=0; i<fees.length; i++ ){
-		console.log(fees[i])
 		if (aReceipts >= fees[i].from && aReceipts < fees[i].to) {
 			$("#membership-fee").text(fees[i].fee);	
 			$('#membership_fee_fee').val(fees[i].fee);		
-			$("#fee-row-" + fees[selectedIndex].id).removeClass("rowOn");
+			$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).removeClass("rowOn");
 			selectedIndex = i;
-			$("#fee-row-" + fees[selectedIndex].id).addClass("rowOn");
+			$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).addClass("rowOn");
 			
 			break;
 		}
@@ -60,9 +63,9 @@ function processOverride() {
 	overrideValue = $('#membership_fee_fee').val();
 	console.log(overrideValue);
 	if(overrideValue == 0) {
-		$("#fee-row-" + selectedIndex).removeClass("rowOn");
-		$("#fee-row-" + overrideRow1).removeClass("rowOn");
-		$("#fee-row-" + overrideRow2).removeClass("rowOn");		
+		$("#fee-row-" + fees[selectedIndex].model_id + "_" + selectedIndex).removeClass("rowOn");
+		$("#fee-row-" + fees[selectedIndex].model_id + "_" + overrideRow1).removeClass("rowOn");
+		$("#fee-row-" + fees[selectedIndex].model_id + "_" + overrideRow2).removeClass("rowOn");		
 		selectedIndex = 0;
 		overrideRow1 = 0;
 		overrideRow2 = 0;

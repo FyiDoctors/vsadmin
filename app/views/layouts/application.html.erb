@@ -18,11 +18,18 @@
 
 	var clinics;
 
+	$("form :input").on("keypress", function(e) {
+	    return e.keyCode != 13;
+	});
+	
 	$('#membership_fee_receipts').numeric({negative: false});
 	$('#membership_fee_creditcard').numeric({negative: false});
 	$('#membership_fee_refunds').numeric({negative: false});
 	$('#membership_fee_tax').numeric({negative: false});
 
+	$("#override-link").hide();
+	$("#saveButton").hide();
+	$("#clinic-display-box").hide();
 	$('#membership_fee_receipts').keyup(function(e){
 			processFees();
 	});
@@ -50,16 +57,39 @@
 		return false;
 	})
 
+	$('#change-button').click(function(e) { 
+		$("#clinic-display-box").hide();
+		$("#clinic-display").text("");
+		$( "#membership_fee_clinic" ).val("" );		
+		$("#clinic-select").show();
+		$("#membership_fee_clinic_id").val(null);
+		$(".fee-overlay").show();
+		$("#override-link").hide();
+		$("#saveButton").hide();
+		$("#membership_fee_clinic").focus();
+		return false;
+	
+	});
+
 	$('#membership_fee_fee').keyup(function(e){
 		processOverride();
 	});
 
 	$.ajax({
 	    type: "GET",
-	    url: "/fees",    
+	    url: "/models/1.json",    
 	    dataType: "json",
 	    success: function(data){
 			fees=data;
+			fees_1 = data;
+	    }
+	  });
+	$.ajax({
+	    type: "GET",
+	    url: "/models/2.json",    
+	    dataType: "json",
+	    success: function(data){
+			fees_2 = data;
 	    }
 	  });
 	$.backstretch("/assets/stairs.jpg");
@@ -89,6 +119,20 @@
 					
 						if (clinicId > 0) {	
 							$("#clinic-link").attr("href", "/reports/show?mode=clinic&clinic="+ui.item.clinic_id);
+							$("#fee_table_1").hide();																
+							$("#fee_table_2").hide();
+							$("#fee_table_" + ui.item.model_id).show();
+							$(".fee-overlay").hide();
+							$("#override-link").show();
+							$("#saveButton").show();
+							if(ui.item.model_id == 1)
+								fees = fees_1;
+							else
+								fees = fees_2;							
+							$("#clinic-display-box").show();
+							$("#clinic-display").text(ui.item.label);
+							$("#clinic-select").hide();
+							processFees();
 						} else {
 							$("#clinic-link").attr("href", "javascript:alert('Make sure you select a clinic.')");
 						}
