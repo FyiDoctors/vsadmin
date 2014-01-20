@@ -3,6 +3,8 @@
 		%td.report-header
 			Vendor Id
 		%td.report-header
+			Vision Source Id
+		%td.report-header
 			Clinic
 		%td.report-header
 			Address
@@ -20,14 +22,14 @@
 			Tax
 		%td.report-header
 			Fee
-		%td.report-header
-			Check Number
 		%td
 
 	- feeArray.each do |fee|
 		%tr
 			%td
 				= fee.clinic.vendorid
+			%td
+				= fee.clinic.vsid
 			%td
 				= fee.clinic.name
 			%td
@@ -46,7 +48,5 @@
 				= number_with_precision(fee.tax, precision: 2)				
 			%td
 				= number_with_precision(fee.fee, precision: 2)
-			%td
-				= number_with_precision(fee.checknumber, precision: 2)
 			%td
 				= link_to "View", "/membership_fees/" + fee.id.to_s
