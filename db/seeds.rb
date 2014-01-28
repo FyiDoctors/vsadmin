@@ -144,5 +144,5 @@ clinic = Clinic.create([ vendorid: "VN0003101", vsid: "101", vsvendorid: "", nam
 clinic = Clinic.create([ vendorid: "VN0003102", vsid: "102", vsvendorid: "", name: "Brian C. Blake, O.D.", address: "2629 Howard Ave, Unit B Devon Plaza, Windsor, ON, N8X 4Z3", 	model_id: 2, admin: false])
 clinic = Clinic.create([ vendorid: "VN0003103", vsid: "103", vsvendorid: "", name: "Chong-hwa Michael Shin, O.D.", address: "138 - 7181 Yonge St., Thornhill, ON, L3T 0C7", 	model_id: 2, admin: false])
 clinic = Clinic.create([ vendorid: "VN0003104", vsid: "104", vsvendorid: "", name: "Pickering Optometric Clinic DBA: Oshawa Optometric Centre", address: "128-419 King St. W, Oshawa, ON, L1J 2K5", 	model_id: 2, admin: false])
-clinic = Clinic.create([ vendorid: "VN0003105", vsid: "105", vsvendorid: "", name: "Pickering Optometric Clinic  DBA:  Pickering Optometric Clinic", address: "212-1885 Glenanna Road, Pickering, ON, L1V 6R6", 	model_id: 2, admin: false])
+clinic = Clinic.create([ vendorid: "VN0003105", vsid: "105", vsvendorid: "", name: "Pickering Optometric Clinic  DBA:  Pickering Optometric Clinic", address: "212-1885 Glenanna Road, Pickering, ON, L1V 6R6", 	model_id: 2, admin: false]) 
 MembershipFee.delete_all
