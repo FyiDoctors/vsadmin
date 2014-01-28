@@ -22,6 +22,8 @@
 		%td.report-header
 			Tax
 		%td.report-header
+			Added Taxes
+		%td.report-header
 			Fee
 		%td.report-header
 			Date Received
@@ -50,6 +52,8 @@
 				= number_with_precision(fee.refunds, precision: 2)
 			%td
 				= number_with_precision(fee.tax, precision: 2)				
+			%td
+				= number_with_precision(fee.taxadd, precision: 2)
 			%td
 				= number_with_precision(fee.fee, precision: 2)
 			%td

@@ -67,6 +67,11 @@
 							0.00
 				%tr
 					%td.bold
+						Optional Tax (state/provincial)
+					%td.fee-td
+						= f.text_field :taxadd, :class=>"money-input"
+				%tr
+					%td.bold
 						Membership Fee Due
 					%td.fee-td
 						#membership-fee.bold
@@ -74,6 +79,7 @@
 						#adjust-link
 							=link_to "Override", "#", id: "override-link", :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
 						= f.text_field :fee, :class=>"money-input", :class=>"money-input hidden"
+
 		%br		
 		= f.submit 'Submit Fees', :id=>"saveButton", :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only", :style=>"width: 200px;"
 	%h3 

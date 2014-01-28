@@ -54,7 +54,7 @@ class MembershipFeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def membership_fee_params
-      params.require(:membership_fee).permit(:receipts, :creditcard, :refunds, :tax, :year, :fee, :month, :checknumber, :clinic_id)
+      params.require(:membership_fee).permit(:receipts, :creditcard, :refunds, :tax, :year, :fee, :month, :checknumber, :clinic_id, :taxadd)
     end
     
     def validate_user

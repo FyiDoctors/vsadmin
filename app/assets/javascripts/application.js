@@ -38,7 +38,7 @@ function processFees() {
 	var fee = 0;
 	var aReceipts = 0;
 
-	receipts = parseInt($('#membership_fee_receipts').val());
+	receipts = parseFloat($('#membership_fee_receipts').val());
 	receipts = isNaN(receipts) ? 0 : receipts;	
 	
 	if(receipts == 0) {
@@ -61,10 +61,10 @@ function processFees() {
 		$('#tax-lbl').css('opacity', '1');
 	}
 
-	card = ($('#membership_fee_creditcard').val()) == "" ? 0 : parseInt($('#membership_fee_creditcard').val())
-	refund = ($('#membership_fee_refunds').val()) == "" ? 0 : parseInt($('#membership_fee_refunds').val())
-	tax = ($('#membership_fee_tax').val()) == "" ? 0 : parseInt($('#membership_fee_tax').val())
-	
+	card = ($('#membership_fee_creditcard').val()) == "" ? 0 : parseFloat($('#membership_fee_creditcard').val())
+	refund = ($('#membership_fee_refunds').val()) == "" ? 0 : parseFloat($('#membership_fee_refunds').val())
+	tax = ($('#membership_fee_tax').val()) == "" ? 0 : parseFloat($('#membership_fee_tax').val())
+	taxAdd = ($('#membership_fee_taxadd').val()) == "" ? 0 : parseFloat($('#membership_fee_taxadd').val())
 	aReceipts = (receipts-card-refund-tax);
  	if( isNaN(aReceipts) ) {
 		$('#adjusted-receipts').text("0.00")
@@ -77,25 +77,24 @@ function processFees() {
 	
 	for( var i=0; i<fees.length; i++ ){
 		if (aReceipts >= fees[i].from && aReceipts < fees[i].to) {
-			fee = parseInt(fees[i].fee);
+			fee = parseFloat(fees[i].fee)+taxAdd;
 			$("#membership-fee").text(fee.toFixed(2));	
-			$('#membership_fee_fee').val(fee.fee);		
+			$('#membership_fee_fee').val(fee);		
 			$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).removeClass("rowOn");
 			selectedIndex = i;
 			$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).addClass("rowOn");
-						
 			return;
 		}
 	}
 
 	// revenue is above last fee slot. Pick max
-	fee = parseInt(fees[fees.length-1].fee);
+	fee = parseFloat(fees[fees.length-1].fee)+taxAdd;
 	$("#membership-fee").text(fee.toFixed(2));	
-	$('#membership_fee_fee').val(fee.fee);		
+	$('#membership_fee_fee').val(fee);		
 	$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).removeClass("rowOn");
 	selectedIndex = fees.length-1;
 	$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).addClass("rowOn");
-				
+						
 	return;
 
 }
@@ -116,7 +115,7 @@ function processOverride() {
 		console.log(i);
 		if (i < fees.length-1) {
 			console.log("from fees: "+fees[i].fee + " to " + fees[i+1].fee)
-			if (overrideValue == parseInt(fees[i].fee)) {
+			if (overrideValue == parseFloat(fees[i].fee)) {
 				$("#membership-fee").text(fees[i].fee);		
 				console.debug("HERE" + overrideRow1)	
 				$("#fee-row-" + fees[selectedIndex].id).removeClass("rowOn");
@@ -128,7 +127,7 @@ function processOverride() {
 				$("#fee-row-" + fees[overrideRow1].id ).addClass("rowOn");
 				break;			
 			}
-			else if (overrideValue > parseInt(fees[i].fee) && overrideValue < parseInt(fees[i+1].fee)) {
+			else if (overrideValue > parseFloat(fees[i].fee) && overrideValue < parseInt(fees[i+1].fee)) {
 				$("#membership-fee").text(fees[i].fee);			
 				$("#fee-row-" + fees[selectedIndex].id).removeClass("rowOn");
 				$("#fee-row-" + fees[overrideRow1].id).removeClass("rowOn");
