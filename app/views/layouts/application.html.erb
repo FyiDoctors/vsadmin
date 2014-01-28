@@ -128,7 +128,14 @@
 							if(ui.item.model_id == 1)
 								fees = fees_1;
 							else
-								fees = fees_2;							
+								fees = fees_2;	
+							if(ui.item.admin == true) {
+								$("#override-link").show();
+							}
+							else {
+								$("#override-link").hide();
+							}
+							
 							$("#clinic-display-box").show();
 							$("#clinic-display").text(ui.item.label);
 							$("#clinic-select").hide();
