@@ -5,6 +5,15 @@ class MembershipFeesController < ApplicationController
   
   # GET /membership_fees
   # GET /membership_fees.json
+  def index 
+    clinicId = params["clinic"]
+    month = params["month"]
+    year = params["year"]
+    
+    logger.debug("CLINIC: " + clinicId)
+    @memberhip_fees = MembershipFee.where(:clinic_id => clinicId, :month => month, :year => year)
+    logger.debug("c" + @memberhip_fees.count.to_s)
+  end
 
   # GET /membership_fees/1
   # GET /membership_fees/1.json

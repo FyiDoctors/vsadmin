@@ -13,13 +13,17 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
+//= require bootstrap.min
 //= require turbolinks
 //= require_tree .
 //= require autocomplete-rails
 
+var override=false;
 var fees_1;
 var fees_2;
 var fees;
+var taxes;
+var taxRate;
 var selectedIndex = 0;
 var overrideRow1 = 0;
 var overrideRow2 = 0;
@@ -35,72 +39,110 @@ function validateFrom() {
 }
 
 function processFees() {
-	var fee = 0;
-	var aReceipts = 0;
+	if(!override) {
+		var fee = 0;
+		var aReceipts = 0;
 
-	receipts = parseFloat($('#membership_fee_receipts').val());
-	receipts = isNaN(receipts) ? 0 : receipts;	
+		receipts = parseFloat($('#membership_fee_receipts').val());
+		receipts = isNaN(receipts) ? 0 : receipts;	
 	
-	if(receipts == 0) {
-		$('#membership_fee_creditcard').prop("disabled", true);
-		$('#membership_fee_refunds').prop("disabled", true);
-		$('#membership_fee_tax').prop("disabled", true);
-		$('#membership_fee_creditcard').val("0");
-		$('#membership_fee_refunds').val("0");
-		$('#membership_fee_tax').val("0");
-		$('#cc-lbl').css('opacity', '.5');
-		$('#ref-lbl').css('opacity', '.5');
-		$('#tax-lbl').css('opacity', '.5');
-	}
-	else {
-		$('#membership_fee_creditcard').prop("disabled", false);
-		$('#membership_fee_refunds').prop("disabled", false);
-		$('#membership_fee_tax').prop("disabled", false);
-		$('#cc-lbl').css('opacity', '1');
-		$('#ref-lbl').css('opacity', '1');
-		$('#tax-lbl').css('opacity', '1');
-	}
-
-	card = ($('#membership_fee_creditcard').val()) == "" ? 0 : parseFloat($('#membership_fee_creditcard').val())
-	refund = ($('#membership_fee_refunds').val()) == "" ? 0 : parseFloat($('#membership_fee_refunds').val())
-	tax = ($('#membership_fee_tax').val()) == "" ? 0 : parseFloat($('#membership_fee_tax').val())
-	taxAdd = ($('#membership_fee_taxadd').val()) == "" ? 0 : parseFloat($('#membership_fee_taxadd').val())
-	aReceipts = (receipts-card-refund-tax);
- 	if( isNaN(aReceipts) ) {
-		$('#adjusted-receipts').text("0.00")
-		aReceipts = 0;
-	}
-	else {
-		$('#adjusted-receipts').text(aReceipts.toFixed(2));		
-	}
-
-	
-	for( var i=0; i<fees.length; i++ ){
-		if (aReceipts >= fees[i].from && aReceipts < fees[i].to) {
-			fee = parseFloat(fees[i].fee)+taxAdd;
-			$("#membership-fee").text(fee.toFixed(2));	
-			$('#membership_fee_fee').val(fee);		
-			$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).removeClass("rowOn");
-			selectedIndex = i;
-			$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).addClass("rowOn");
-			return;
+		if(receipts == 0) {
+			$('#membership_fee_creditcard').prop("disabled", true);
+			$('#membership_fee_refunds').prop("disabled", true);
+			$('#membership_fee_tax').prop("disabled", true);
+			$('#membership_fee_creditcard').val("0");
+			$('#membership_fee_refunds').val("0");
+			$('#membership_fee_tax').val("0");
+			$('#cc-lbl').css('opacity', '.5');
+			$('#ref-lbl').css('opacity', '.5');
+			$('#tax-lbl').css('opacity', '.5');
 		}
-	}
+		else {
+			$('#membership_fee_creditcard').prop("disabled", false);
+			$('#membership_fee_refunds').prop("disabled", false);
+			$('#membership_fee_tax').prop("disabled", false);
+			$('#cc-lbl').css('opacity', '1');
+			$('#ref-lbl').css('opacity', '1');
+			$('#tax-lbl').css('opacity', '1');
+		}
+	
+		card = ($('#membership_fee_creditcard').val()) == "" ? 0 : parseFloat($('#membership_fee_creditcard').val())
+		refund = ($('#membership_fee_refunds').val()) == "" ? 0 : parseFloat($('#membership_fee_refunds').val())
+		tax = ($('#membership_fee_tax').val()) == "" ? 0 : parseFloat($('#membership_fee_tax').val())
+	
+		aReceipts = (receipts-card-refund-tax);
+	 	if( isNaN(aReceipts) ) {
+			$('#adjusted-receipts').text("0.00")
+			aReceipts = 0;
+		}
+		else {
+			$('#adjusted-receipts').text(aReceipts.toFixed(2));		
+		}
 
-	// revenue is above last fee slot. Pick max
-	fee = parseFloat(fees[fees.length-1].fee)+taxAdd;
-	$("#membership-fee").text(fee.toFixed(2));	
-	$('#membership_fee_fee').val(fee);		
-	$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).removeClass("rowOn");
-	selectedIndex = fees.length-1;
-	$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).addClass("rowOn");
+	
+		for( var i=0; i<fees.length; i++ ){
+			if (aReceipts >= fees[i].from && aReceipts < fees[i].to) {
+				$("#fee").text(parseFloat(fees[i].fee).toFixed(2));
+				taxAdd = fees[i].fee*(taxRate/100)
+				//taxAdd = ($('#membership_fee_taxadd').val()) == "" ? 0 : parseFloat($('#membership_fee_taxadd').val())
+				fee = parseFloat(fees[i].fee)+(taxAdd);
+				$("#membership-fee").text(fee.toFixed(2));	
+				$('#membership_fee_fee').val(fee);		
+				$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).removeClass("rowOn");
+				selectedIndex = i;
+				$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).addClass("rowOn");
+				$("#taxes").text(taxAdd.toFixed(2));
+				$('#membership_fee_taxadd').val(taxAdd.toFixed(2));
+		
+				return;
+			}
+		}
+
+		// revenue is above last fee slot. Pick max
+		$("#fee").text(parseFloat(fees[fees.length-1].fee).toFixed(2));
+		taxAdd = fees[fees.length-1].fee*(taxRate/100)
+		fee = parseFloat(fees[fees.length-1].fee)+taxAdd;
+		$("#membership-fee").text(fee.toFixed(2));	
+		$('#membership_fee_fee').val(fee);		
+		$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).removeClass("rowOn");
+		selectedIndex = fees.length-1;
+		$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).addClass("rowOn");
+		$("#ptaxes").text(taxAdd.toFixed(2));
+		$('#membership_fee_taxadd').val(taxAdd.toFixed(2));
 						
-	return;
+		return;
+	}
+	else {
+		var aReceipts = 0;
 
+		receipts = parseFloat($('#membership_fee_receipts').val());
+		receipts = isNaN(receipts) ? 0 : receipts;	
+		
+		card = ($('#membership_fee_creditcard').val()) == "" ? 0 : parseFloat($('#membership_fee_creditcard').val())
+		refund = ($('#membership_fee_refunds').val()) == "" ? 0 : parseFloat($('#membership_fee_refunds').val())
+		tax = ($('#membership_fee_tax').val()) == "" ? 0 : parseFloat($('#membership_fee_tax').val())
+	
+		aReceipts = (receipts-card-refund-tax);
+		if( isNaN(aReceipts) ) {
+			$('#adjusted-receipts').text("0.00")
+			aReceipts = 0;
+		}
+		else {
+			$('#adjusted-receipts').text(aReceipts.toFixed(2));		
+		}
+	 	
+	}
 }
 
 function processOverride() {
-	overrideValue = $('#membership_fee_fee').val();
+	var overrideValue = $('#fee-override').val();
+	var taxAdd = overrideValue*(taxRate/100);
+	$("#taxes").text(taxAdd.toFixed(2));
+	$("#membership_fee_taxadd").val(taxAdd.toFixed(2));
+	var fee = parseFloat(overrideValue)+parseFloat(taxAdd);
+	$("#membership-fee").text(fee.toFixed(2));	
+	$('#membership_fee_fee').val(fee);		
+	
 	console.log(overrideValue);
 	if(overrideValue == 0) {
 		$("#fee-row-" + fees[selectedIndex].model_id + "_" + selectedIndex).removeClass("rowOn");
@@ -111,49 +153,7 @@ function processOverride() {
 		overrideRow2 = 0;
 		return;
 	}
-	for( var i=0; i<fees.length; i++ ){
-		console.log(i);
-		if (i < fees.length-1) {
-			console.log("from fees: "+fees[i].fee + " to " + fees[i+1].fee)
-			if (overrideValue == parseFloat(fees[i].fee)) {
-				$("#membership-fee").text(fees[i].fee);		
-				console.debug("HERE" + overrideRow1)	
-				$("#fee-row-" + fees[selectedIndex].id).removeClass("rowOn");
-				$("#fee-row-" + fees[overrideRow1].id).removeClass("rowOn");
-				$("#fee-row-" + fees[overrideRow2].id).removeClass("rowOn");
-				selectedIndex = i;
-				overrideRow1 = i;
-				overrideRow2 = i;
-				$("#fee-row-" + fees[overrideRow1].id ).addClass("rowOn");
-				break;			
-			}
-			else if (overrideValue > parseFloat(fees[i].fee) && overrideValue < parseInt(fees[i+1].fee)) {
-				$("#membership-fee").text(fees[i].fee);			
-				$("#fee-row-" + fees[selectedIndex].id).removeClass("rowOn");
-				$("#fee-row-" + fees[overrideRow1].id).removeClass("rowOn");
-				$("#fee-row-" + fees[overrideRow2].id).removeClass("rowOn");
-				selectedIndex = i;
-				overrideRow1 = i;
-				overrideRow2 = i+1;
-			
-				console.log("VAL: " + overrideValue);
-				$("#fee-row-" + fees[overrideRow1].id ).addClass("rowOn");
-				$("#fee-row-" + fees[overrideRow2].id ).addClass("rowOn");
-				break;
-			}
-		}
-		else {
-			console.log("last one");
-			$("#fee-row-" + fees[selectedIndex].id).removeClass("rowOn");
-			$("#fee-row-" + fees[overrideRow1].id).removeClass("rowOn");
-			$("#fee-row-" + fees[overrideRow2].id).removeClass("rowOn");		
-			selectedIndex = 0;
-			overrideRow1 = fees.length;
-			overrideRow2 = 0;
-			$("#fee-row-" + fees[overrideRow1].id ).addClass("rowOn");
-			return;
-		}
-	}
+	
 }
 
 $(document).ready(function() {
@@ -183,5 +183,16 @@ function updateMonthLink() {
 
 function doDateReport() {
 		window.location = "/reports/show?mode=date&month="+month+"&year="+year	
+}
+
+function getTaxRecord(province) {
+	for( var i=0; i<taxes.length; i++ ){
+		if (province == taxes[i].province) {
+			taxRate = parseInt(taxes[i].rate);
+			$("#tax-name").text(taxes[i].province + " Provincial Tax (" + taxes[i].rate + "% " + taxes[i].name + ")")
+		}
+		
+	}
+	
 }
 

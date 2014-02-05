@@ -17,7 +17,39 @@
 <script>
 
 	var clinics;
+	var clinicId;
+	$("#saveButton").click(function(e) {
+		month = $("#membership_fee_month option:selected").text()
+		year = $("#membership_fee_year option:selected").text()
 
+		url = "/membership_fees.json?clinic=" + clinicId + "&month=" + month + "&year=" + year;
+
+		$.ajax({
+		    type: "GET",
+		    url: url,    
+		    dataType: "json",
+		    success: function(data){
+				if(data.length > 0) {
+					$.confirm({
+					    text: "A submission for the selected month already exists. Please verify you have entered the correct month. If you choose to continue we will override the previous submission. Do you wish to continue saving this form?",
+					    confirm: function(button) {
+							$("#new_membership_fee").submit();
+					    },
+					    cancel: function(button) {
+					        // do nothing
+					    }
+					});
+				}
+				else {
+					$("#new_membership_fee").submit();
+				}
+		    }
+		  });
+
+
+		return false;
+	});
+	
 	$("#new_membership_fee :input").on("keypress", function(e) {
 	    return e.keyCode != 13;
 	});
@@ -52,11 +84,16 @@
 		updateMonthLink();
 	})
 	$('#override-link').click(function(e) {
+		override = true;
 		$('#override-link').hide();
-		$('#membership-fee').hide();
-		$('#membership_fee_fee').show();
+		$('#fee-row').hide();
+		//$('#membership-fee').hide();
+		//$('#membership_fee_fee').show();
 		$('#membership_fee_fee').val($("#membership-fee").text());
+		$("#override-row").show();
 	
+		$("#fee-override").val($("#fee").text())
+		$('#fee-override').select();
 		return false;
 	})
 
@@ -70,13 +107,27 @@
 		$("#override-link").hide();
 		$("#saveButton").hide();
 		$("#membership_fee_clinic").focus();
+		$('#fee-row').show();
+		$("#override-row").hide();
+		
+		override=false;
+		processFees();
 		return false;
 	
 	});
 
-	$('#membership_fee_fee').keyup(function(e){
+	$('#fee-override').keyup(function(e){
 		processOverride();
 	});
+
+	$.ajax({
+	    type: "GET",
+	    url: "/taxes.json",    
+	    dataType: "json",
+	    success: function(data){
+			taxes=data;
+	    }
+	  });
 
 	$.ajax({
 	    type: "GET",
@@ -95,7 +146,7 @@
 			fees_2 = data;
 	    }
 	  });
-	$.backstretch("/assets/stairs.jpg");
+	$.backstretch("/assets/cave.jpg");
 	if ($("#membership_fee_clinic").val() != null) {
 		$.ajax({
 		    type: "GET",
@@ -107,6 +158,8 @@
 				for (var i = 0; i<obj.length; i++) {
 				    obj[i].label = obj[i].name;
 				    obj[i].clinic_id = obj[i].id;
+					obj[i].province = obj[i].province;
+
 				    delete obj[i].name;
 				    delete obj[i].id;
 					delete obj[i].url;
@@ -144,6 +197,8 @@
 							$("#clinic-select").hide();
 							
 							$("#membership_fee_month").focus();
+							
+							getTaxRecord(ui.item.province)
 							
 							processFees();
 						} else {

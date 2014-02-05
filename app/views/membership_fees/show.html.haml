@@ -1,5 +1,5 @@
 .fee-container
-	%h3 Thank you for submitting you member data. 
+	%h4 Thank you for submitting your member data. 
 
 	%p 
 		Cheques should be made payable to Vision Source Canada. Please include your confirmation number 
@@ -78,6 +78,18 @@
 					Adjusted Gross Receipts
 				%td.underline.numeric-display
 					= number_to_currency(@membership_fee.receipts - @membership_fee.creditcard - @membership_fee.refunds - @membership_fee.tax)
+			%tr
+				%td
+					Base Fee
+				%td
+					#taxes
+						= number_to_currency(@membership_fee.fee - @membership_fee.taxadd) 
+			%tr
+				%td
+					Provincial Taxes
+				%td
+					#taxes
+						= number_to_currency(@membership_fee.taxadd)
 			%tr
 				%td.bold
 					Membership Fee Due

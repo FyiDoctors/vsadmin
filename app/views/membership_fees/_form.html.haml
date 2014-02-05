@@ -1,7 +1,8 @@
 .fee-container
-	%h1 Membership Fees
+	%h2 Membership Fees
 
-	%h3 Please enter the following data to compute the montly membership fee due. 
+	%h5 Please enter the following data to compute the montly membership fee due. 
+	%br
 	= form_for @membership_fee do |f|
 		- if @membership_fee.errors.any?
 			#error_explanation
@@ -25,59 +26,78 @@
 		.field.hidden
 			= f.label :checknumber, :class=>"padded-label"
 			= f.text_field :checknumber, :style=>"width: 200px"
-		.field
-			= f.label :month, :class=>"padded-label"
-			= f.select :month, @months
-			= f.select :year, @years, :selected=>"2014"
-
+		%p
+		%span.bold{:style=>"padding-right: 35px;"}
+			Month
+		= f.select :month, @months
+		= f.select :year, @years, :selected=>"2014"
+		%p
 		.fee-data
 			.fee-overlay
 				%br
-				%br
 				You must select a clinic first
+			%br
 			%table.finance-table
 				%tr
-					%td
+					%td{:style=>"width: 320px"}
 						= f.label :receipts
 					%td
 						= f.text_field :receipts, :class=>"money-input"
 				%tr
 					%td.indent30#cc-lbl
 						.minus
-						= f.label :creditcard, "Credit Card Processing Fee"
+						%span
+							Credit Card Processing Fee
 					%td
 						= f.text_field :creditcard, :class=>"money-input"
 				%tr
 					%td.indent30#ref-lbl
 						.minus
-						= f.label :refunds, "Refunds to Patients"
+						%span
+							Refunds to Patients
 					%td
 						= f.text_field :refunds, :class=>"money-input"
 				%tr
 					%td.indent30#tax-lbl
 						.minus
-						= f.label :tax, "Sales Tax Paid by Patient"
+						%span
+							Sales Tax Paid by Patient
 					%td
 						= f.text_field :tax, :class=>"money-input"
 				%tr
-					%td.underline
+					%td.underline{:style=>"padding-bottom: 5px;"}
 						Adjusted Gross Receipts
 					%td.underline
 						#adjusted-receipts
 							0.00
-				%tr
+				%tr#override-row{:style=>"display: none;"}
 					%td.bold
-						Optional Tax (state/provincial)
+						Fee Override (enter value)
 					%td.fee-td
-						= f.text_field :taxadd, :class=>"money-input"
+						= text_field_tag "fee-override", "0.00", :id=>"fee-override", :style=>"money-input  hidden; text-align: right;"
+				%tr#fee-row
+					%td
+						Fee
+					%td.fee-td
+						#adjust-link
+							=link_to "Override", "#", id: "override-link", :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+						#fee
+							0.00
+				%tr
+					%td 
+						%span#tax-name 
+							Provincial Tax ()
+					%td.tax-td
+						#taxes
+							0.00
+						= f.text_field :taxadd, :class=>"money-input hidden"
+						
 				%tr
 					%td.bold
 						Membership Fee Due
 					%td.fee-td
 						#membership-fee.bold
 							0.00
-						#adjust-link
-							=link_to "Override", "#", id: "override-link", :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
 						= f.text_field :fee, :class=>"money-input", :class=>"money-input hidden"
 
 		%br		

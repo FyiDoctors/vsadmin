@@ -8,10 +8,21 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require bootstrap.min
  *= require_self
  *= require_tree .
  *= require jquery-ui/ui-lightness
  */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../assets/glyphicons-halflings-regular.eot');
+  src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
+       url('../assets/glyphicons-halflings-regular.woff') format('woff'), 
+       url('../assets/glyphicons-halflings-regular.ttf') format('truetype'), 
+       url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
 body {
   background-color: #ececec;
   color: #333;
@@ -118,10 +129,10 @@ p, ol, ul, td {
 }
 .fee-overlay {
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 20px;
+	left: -10px;
 	width: 500px;
-	height: 200px;
+	height: 190px;
 	background-color: #000;
 	opacity: .5;
 	text-align: center;
@@ -150,7 +161,7 @@ div.field {
 	text-align: right;
 }
 
-#membership-fee {
+#membership-fee, #taxes, #fee{
 	width: 100px;
 	float: left;
 	text-align: right;
@@ -172,7 +183,7 @@ label{
   display: block
 }
 .padded-label {
-  margin-right: 6.5em;
+  margin-right: 2.0Fem;
 	
 }
 input {
