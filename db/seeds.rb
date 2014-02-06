@@ -24,7 +24,7 @@ fee = Fee.create([ from: "175000", to: "200000", fee: "1875.00", model_id: 1])
 fee = Fee.create([ from: "200000", to: "225000", fee: "2125.00", model_id: 1])
 
 fee = Fee.create([ from: "0", to: "10000", fee: "75.00", model_id: 2])
-fee = Fee.create([ from: "11000", to: "30000", fee: "300.00", model_id: 2])
+fee = Fee.create([ from: "10000", to: "30000", fee: "300.00", model_id: 2])
 fee = Fee.create([ from: "30000", to: "50000", fee: "600.00", model_id: 2])
 fee = Fee.create([ from: "50000", to: "70000", fee: "900.00", model_id: 2])
 fee = Fee.create([ from: "70000", to: "90000", fee: "1200.00", model_id: 2])
@@ -48,10 +48,10 @@ fee = Fee.create([ from: "475000", to: "500000", fee: "7325.00", model_id: 2])
 
 Tax.delete_all
 
-tax = Tax.create([ province: "ON", rate: 13, name: "HST"])
-tax = Tax.create([ province: "BC", rate: 12, name: "GST+PST"])
-tax = Tax.create([ province: "AB", rate: 5, name: "GST"])
-tax = Tax.create([ province: "MB", rate: 13, name: "GST+PST"])
+tax = Tax.create([ province: "ON", rate: 13, prate: 0, name: "HST"])
+tax = Tax.create([ province: "BC", rate: 12, prate: 7, name: "GST+PST"])
+tax = Tax.create([ province: "AB", rate: 5, prate: 0, name: "GST"])
+tax = Tax.create([ province: "MB", rate: 13, prate: 8, name: "GST+PST"])
 
 Clinic.delete_all
 clinic = Clinic.create([ vendorid: "VN0003000", vsid: "0", vsvendorid: "", name: "Test Vendor VS", address: "Test ST, Oakville, ON", 	model_id: 1, province: 'ON', admin: false])
@@ -110,9 +110,9 @@ clinic = Clinic.create([ vendorid: "VN0003056", vsid: "56", vsvendorid: "", name
 clinic = Clinic.create([ vendorid: "VN0003057", vsid: "57", vsvendorid: "NELLES", name: "Dr. Gary Nelles Optometry Professional Corporation", address: "36 Brock St. West, Tillsonburg, ON, N4G2A2", 	model_id: 2, province: 'ON', admin: false])
 clinic = Clinic.create([ vendorid: "VN0003058", vsid: "58", vsvendorid: "TRAN", name: "Precision Eye Care", address: "2965 Ellwood Dr., Edmonton, AB, T6X 0B1", 	model_id: 2, province: 'ON', admin: false])
 clinic = Clinic.create([ vendorid: "VN0003059", vsid: "59", vsvendorid: "PRINZEN", name: "BIlli Jayne Prinzen, O.D.", address: "13380 Loyalist Parkway, Picton, ON, K0K 2T0", 	model_id: 2, province: 'ON', admin: false])
-clinic = Clinic.create([ vendorid: "VN0003060", vsid: "60", vsvendorid: "RITCHIE", name: "Dr.'s Hall, Ritchie & Smith", address: "51 Water St. North, Cambridge, ON, N1R 3B3", 	model_id: 2, province: 'ON', admin: false])
-clinic = Clinic.create([ vendorid: "VN0003061", vsid: "61", vsvendorid: "SMITH", name: "Dr.'s Hall, Ritchie & Smith", address: "51 Water St. North, Cambridge, ON, N1R 3B3", 	model_id: 2, province: 'ON', admin: false])
-clinic = Clinic.create([ vendorid: "VN0003062", vsid: "62", vsvendorid: "HALL or HALL&OTHERS", name: "Dr.'s Hall, Ritchie & Smith", address: "51 Water St. North, Cambridge, ON, N1R 3B3", 	model_id: 2, province: 'ON', admin: false])
+clinic = Clinic.create([ vendorid: "VN0003060", vsid: "60", vsvendorid: "RITCHIE", name: "Dr. Ritchie", address: "51 Water St. North, Cambridge, ON, N1R 3B3", 	model_id: 2, province: 'ON', admin: false])
+clinic = Clinic.create([ vendorid: "VN0003061", vsid: "61", vsvendorid: "SMITH", name: "Dr. Smith", address: "51 Water St. North, Cambridge, ON, N1R 3B3", 	model_id: 2, province: 'ON', admin: false])
+clinic = Clinic.create([ vendorid: "VN0003062", vsid: "62", vsvendorid: "HALL or HALL&OTHERS", name: "Dr. Hall", address: "51 Water St. North, Cambridge, ON, N1R 3B3", 	model_id: 2, province: 'ON', admin: false])
 clinic = Clinic.create([ vendorid: "VN0003063", vsid: "63", vsvendorid: "PETERSON01", name: "Optometry on Hyde Park", address: "1900 Hyde Park Rd., Ste. 5, London, ON, N6H 5L9", 	model_id: 2, province: 'ON', admin: false])
 clinic = Clinic.create([ vendorid: "VN0003066", vsid: "66", vsvendorid: "YOSHIMURA", name: "Dr. Mark Yoshimura, Yorkview Vision & Eyecare", address: "3695 Keele St., Ste. 101, Downsview, ON, M3J 1N2", 	model_id: 2, province: 'ON', admin: false])
 clinic = Clinic.create([ vendorid: "VN0003067", vsid: "67", vsvendorid: "DIBERARDINO", name: "Orangeville Optometrists", address: "31 First St., Orangeville, ON, L9W 2C8", 	model_id: 2, province: 'ON', admin: false])

@@ -22,9 +22,13 @@
 		%td.report-header
 			Tax
 		%td.report-header
-			Added Taxes
+			Prov. Tax
+		%td.report-header
+			Fed. Tax
 		%td.report-header
 			Fee
+		%td.report-header
+			Fee + Taxes
 		%td.report-header
 			Date Received
 
@@ -51,10 +55,16 @@
 			%td
 				= number_with_precision(fee.refunds, precision: 2)
 			%td
-				= number_with_precision(fee.tax, precision: 2)				
+				= number_with_precision(fee.tax, precision: 2)	
+			- prate = Tax.where(:province => fee.clinic.province).first.prate/100
+			- frate = (Tax.where(:province => fee.clinic.province).first.rate/100)-prate
 			%td
-				= number_with_precision(fee.taxadd, precision: 2)
+				= number_with_precision(((fee.fee - fee.taxadd) * (frate)), precision: 2)	
 			%td
-				= number_with_precision(fee.fee, precision: 2)
+				= number_with_precision(((fee.fee - fee.taxadd) * (prate)), precision: 2)
+			%td
+				= number_with_precision((fee.fee - fee.taxadd), precision: 2)
+			%td
+				= number_with_precision((fee.fee), precision: 2)
 			%td
 				= fee.created_at
