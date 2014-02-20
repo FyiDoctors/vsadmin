@@ -16,6 +16,6 @@
 		= select('year', 'id', @years)
 		
 		%br
-		= link_to "run for month", "/reports/show?mode=date&month="+@months[0]+"&year="+@years[0], id: "date-link"
+		= link_to "run for month", "/reports/show?mode=month&month="+@months[0]+"&year="+@years[0], id: "date-link"
 		%br
 		= link_to "run for month submitted", "/reports/show?mode=submit&month="+@months[0]+"&year="+@years[0], id: "submit-link"

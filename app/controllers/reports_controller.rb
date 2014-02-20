@@ -17,7 +17,7 @@ class ReportsController < ApplicationController
       @clinic = Clinic.find(clinic_id)
       @memeber_fees = MembershipFee.where(:clinic_id => @clinic.id)
       logger.debug("results: " + @memeber_fees.count.to_s)
-    elsif @mode == "date"
+    elsif @mode == "month"
       @month = params[:month]
       @year = params[:year]
       @memeber_fees = MembershipFee.where(:month => @month, :year => @year)

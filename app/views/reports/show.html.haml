@@ -4,13 +4,13 @@
 		= link_to "Export to CSV", "/reports/show.csv?mode=clinic&clinic=" + @clinic.id.to_s
 		= render partial: "feetable", :locals => {:feeArray => @memeber_fees}
 		= link_to "Export to CSV", "/reports/show.csv?mode=clinic&clinic=" + @clinic.id.to_s
-	- elsif @mode == "date"
+	- elsif @mode == "month"
 		%h3 Report for #{@month}, #{@year}
 		= link_to "Export to CSV", "/reports/show.csv?mode=month&month=" + @month + "&year=" + @year
 		= render partial: "feetable", :locals => {:feeArray => @memeber_fees}
 		= link_to "Export to CSV", "/reports/show.csv?mode=month&month=" + @month + "&year=" + @year
 	- elsif @mode == "submit"
 		%h3 Report for Fees submitted in #{@month}, #{@year}
-		= link_to "Export to CSV", "/reports/show.csv?mode=month&month=" + @month + "&year=" + @year
+		= link_to "Export to CSV", "/reports/show.csv?mode=submit&month=" + @month + "&year=" + @year
 		= render partial: "feetable", :locals => {:feeArray => @memeber_fees}
-		= link_to "Export to CSV", "/reports/show.csv?mode=month&month=" + @month + "&year=" + @year
+		= link_to "Export to CSV", "/reports/show.csv?mode=submit&month=" + @month + "&year=" + @year
