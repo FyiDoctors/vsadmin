@@ -40,7 +40,10 @@
 			%table.finance-table
 				%tr
 					%td{:style=>"width: 320px"}
-						= f.label :receipts
+						%span{:style => "font-weight: bold;"}
+							Receipts
+						%span{:style=>"font-size: 12px"}
+							($ collected from exams/sales)
 					%td
 						= f.text_field :receipts, :class=>"money-input"
 				%tr

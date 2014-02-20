@@ -11,15 +11,18 @@ class SecuritiesController < ApplicationController
   # GET /securities/1
   # GET /securities/1.json
   def show
+    validate_user
   end
 
   # GET /securities/new
   def new
     @security = Security.new
+    validate_user
   end
 
   # GET /securities/1/edit
   def edit
+    validate_user
   end
 
   # POST /securities
@@ -70,6 +73,18 @@ class SecuritiesController < ApplicationController
   end
 
   private
+    def validate_user
+      logged_in = session[:logged_in]
+      logger.debug("validate user")
+      if logged_in == nil || logged_in != "admin"
+        redirect_to "/admin.html"
+        return false
+      else
+        logger.debug("session: " + logged_in)
+      end
+      return true
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_security
       @security = Security.find(params[:id])
