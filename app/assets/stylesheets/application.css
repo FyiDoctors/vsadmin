@@ -120,7 +120,6 @@ p, ol, ul, td {
 .report-container {
 	height: 100%;
 	width: 100%;
-	margin: 0 auto;
 	background-color: #FFF;
 	padding: 20px;
 	
@@ -263,7 +262,7 @@ input {
 }
 
 .rowOn {
-	background-color: #bec7ed;
+	/*background-color: #bec7ed; TODO: add row highlighting back in*/
 }
 
 .money-input {
@@ -273,8 +272,9 @@ input {
 
 
 #clinicReport {
-	
+	background-color: #FFF;
 }
+
 #clinicReport td {
 	padding-left: 20px;
 	padding-right: 5px;

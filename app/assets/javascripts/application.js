@@ -179,6 +179,7 @@ function updateMonthLink() {
 	month = $('#month_id').find(":selected").val();
 	year = $('#year_id').find(":selected").val();
 	$("#date-link").attr("href", "/reports/show?mode=date&month="+month+"&year="+year);
+	$("#submit-link").attr("href", "/reports/show?mode=submit&month="+month+"&year="+year);
 }
 
 function doDateReport() {
