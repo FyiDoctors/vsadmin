@@ -10,12 +10,21 @@
 		= link_to "run", "javascript:alert('Make sure you select a clinic.')", id: "clinic-link"
 		
 	%h3
-		View Submissions by Month
+		View Submissions by Submission Date
 	.date-select	
 		= select('month', 'id', @months)
 		= select('year', 'id', @years)
 		
 		= link_to "run", "/reports/show?mode=date&month="+@months[0]+"&year="+@years[0], id: "date-link"
+	%h3
+		View Submissions by Month Sumbitted
+	.date-select
+		= select('month', 'id', @months)
+		= select('year', 'id', @years)
+
+		= link_to "run", "/reports/show?mode=submit&month="+@months[0]+"&year="+@years[0], id: "date-link"
+		
+	
 		
 		
 	

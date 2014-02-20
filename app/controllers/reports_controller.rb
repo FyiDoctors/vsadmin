@@ -17,10 +17,20 @@ class ReportsController < ApplicationController
       @clinic = Clinic.find(clinic_id)
       @memeber_fees = MembershipFee.where(:clinic_id => @clinic.id)
       logger.debug("results: " + @memeber_fees.count.to_s)
-    else
+    elsif @mode == "date"
       @month = params[:month]
       @year = params[:year]
       @memeber_fees = MembershipFee.where(:month => @month, :year => @year)
+    elsif @mode == "submit"
+      @month = params[:month]
+      @year = params[:year]
+
+      startDate = Date.parse("1-" + @month + "-" + @year)
+      endDate = startDate.to_time.advance(:months => 1).to_date
+      
+      logger.debug(startDate)
+      @memeber_fees = MembershipFee.where(:created_at => startDate .. endDate)
+      
     end
     
     respond_to do |format|
