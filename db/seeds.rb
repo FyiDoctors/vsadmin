@@ -49,7 +49,7 @@ fee = Fee.create([ from: "475000", to: "500000", fee: "7325.00", model_id: 2])
 Tax.delete_all
 
 tax = Tax.create([ province: "ON", rate: 13, prate: 0, name: "HST"])
-tax = Tax.create([ province: "BC", rate: 12, prate: 7, name: "GST+PST"])
+tax = Tax.create([ province: "BC", rate: 12, prate: 7, name: "GST"])
 tax = Tax.create([ province: "AB", rate: 5, prate: 0, name: "GST"])
 tax = Tax.create([ province: "MB", rate: 13, prate: 8, name: "GST+PST"])
 
