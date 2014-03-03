@@ -31,7 +31,7 @@
 		    success: function(data){
 				if(data.length > 0) {
 					$.confirm({
-					    text: "A submission for the selected month already exists. Please verify you have entered the correct month. If you choose to continue we will override the previous submission. Do you wish to continue saving this form?",
+					    text: "A submission for the selected month already exists. Please verify you have entered the correct month. If you choose to continue we will override the previous submission. Do you wish to continue saving this form?<br/><br/><div style='font-weight: bold'>PLEASE NOTE:</div><br/>By clicking continue you hereby certify that the information being submitted is correct and accurate. ",
 					    confirm: function(button) {
 							$("#new_membership_fee").submit();
 					    },
@@ -43,9 +43,19 @@
 					});
 				}
 				else {
-					$("#new_membership_fee").submit();
-				}
-		    }
+					$.confirm({
+					    text: "<div style='font-weight: bold'>PLEASE NOTE:</div><br/>By clicking continue you hereby certify that the information being submitted is correct and accurate. ",
+					    confirm: function(button) {
+							$("#new_membership_fee").submit();
+					    },
+					    cancel: function(button) {
+					        // do nothing
+					    },
+						confirmButton: "Continue",
+						cancelButton: "Cancel"
+					});				}
+		    },
+			
 		  });
 
 

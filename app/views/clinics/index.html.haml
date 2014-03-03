@@ -1,23 +1,26 @@
-%h1 Listing clinics
+.ui-container
+	%h1 Listing clinics
 
-%table
-  %tr
-    %th Name
-    %th Doctor
-    %th Address
-    %th
-    %th
-    %th
+	%table
+		%tr
+			%th Vendor ID
+			%th Name
+			%th Address
+			%th Model
+			%th Admin
+			%th
+			%th
+			%th
 
-  - @clinics.each do |clinic|
-    %tr
-      %td= clinic.name
-      %td= clinic.doctor
-      %td= clinic.address
-      %td= link_to 'Show', clinic
-      %td= link_to 'Edit', edit_clinic_path(clinic)
-      %td= link_to 'Destroy', clinic, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Clinic', new_clinic_path
+		- @clinics.each do |clinic|
+			%tr
+				%td= clinic.vendorid
+				%td= clinic.name
+				%td= clinic.address
+				%td= clinic.model_id
+				%td= clinic.admin
+				%td= link_to 'Show', clinic
+				%td= link_to 'Edit', edit_clinic_path(clinic)
+				%td= link_to 'Destroy', clinic, :method => :delete, :data => { :confirm => 'Are you sure?' }
+	%br
+	= link_to 'New Clinic', new_clinic_path

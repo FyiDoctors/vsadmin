@@ -70,7 +70,7 @@ class ClinicsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def clinic_params
-      params.require(:clinic).permit(:name, :doctor, :address, :vsid, :vsvendorid)
+      params.require(:clinic).permit(:name, :address, :vendorid, :admin)
     end
     
     

@@ -10,7 +10,13 @@
     = f.label :name
     = f.text_field :name
   .field
-    = f.label :doctor
-    = f.text_field :doctor
+    = f.label :address
+    = f.text_field :address
+  .field
+    = f.label :model_id
+    = f.text_field :model_id
+  .field
+    = f.label :admin
+    = f.check_box :admin
   .actions
     = f.submit 'Save'

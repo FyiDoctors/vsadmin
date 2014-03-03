@@ -1,12 +1,22 @@
-%p#notice= notice
+.ui-container
+	%p#notice= notice
 
-%p
-  %b Name:
-  = @clinic.name
-%p
-  %b Doctor:
-  = @clinic.doctor
+	%p
+		%b Vendor Id:
+		= @clinic.vendorid
+	%p
+		%b Name:
+		= @clinic.name
+	%p
+		%b Address:
+		= @clinic.address
+	%p
+		%b Model ID:
+		= @clinic.model_id
+	%p
+		%b Admin:
+		= @clinic.admin
 
-= link_to 'Edit', edit_clinic_path(@clinic)
-\|
-= link_to 'Back', clinics_path
+	= link_to 'Edit', edit_clinic_path(@clinic)
+	\|
+	= link_to 'Back', clinics_path

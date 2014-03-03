@@ -104,7 +104,7 @@
 						= f.text_field :fee, :class=>"money-input", :class=>"money-input hidden"
 
 		%br		
-		= f.submit 'Save Fees', :id=>"saveButton", :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only", :style=>"width: 200px;"
+		= f.submit 'Save Fees', :id=>"saveButton", :class=>"btn btn-custom", :style=>"width: 200px;"
 	%h3 
 		Fee Schedule
 	= render partial: "fees", :locals => {:fees => @feesA, :display=>"none", :id=>1}	
