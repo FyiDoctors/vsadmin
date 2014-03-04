@@ -10,6 +10,7 @@ gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'rails4-autocomplete'
 gem 'rails_12factor', group: :production
+gem 'mandrill-api'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

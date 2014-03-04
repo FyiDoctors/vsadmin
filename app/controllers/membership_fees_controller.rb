@@ -1,4 +1,6 @@
 class MembershipFeesController < ApplicationController
+  require 'mandrill'
+  include ActionView::Helpers::NumberHelper
   autocomplete :clinic, :name, :full => true
   before_action :set_membership_fee, only: [:show, :edit, :update, :destroy]
   before_action :validate_user
@@ -38,7 +40,6 @@ class MembershipFeesController < ApplicationController
   # POST /membership_fees.json
   def create
     @membership_fee = MembershipFee.new(membership_fee_params)
-    @clinics = Clinic.all
     @months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     @years = ["2013", "2014"]
     @feesA = Fee.where(:model_id => 1)
@@ -46,6 +47,76 @@ class MembershipFeesController < ApplicationController
     
     respond_to do |format|
       if @membership_fee.save
+        m = Mandrill::API.new # All official Mandrill API clients will automatically pull your API key from the environment
+
+        body = "<h2>Thank you for submitting your member data.</h2> \
+        <br> \
+        <p>The following is a summary of what is required for remittance.</p> \
+        <br> \
+        <p>Cheques should be made payable to Vision Source Canada. Please include your confirmation number [VS-00" + @membership_fee.id.to_s + "] on your check. Payment is due 45 days after month-end. We also recommend printing a copy of this confirmation receipt for your records.</p> \
+        <span style='font-weight: bold'>Send to:</span> \
+        <br><br> \
+        <p>Confirmation Number <span style='font-weight: bold'>VS-00" + @membership_fee.id.to_s + "</span></p> \
+        <span style='font-weight: bold'>" + @membership_fee.clinic.name + "</span> \
+        <p style='padding-left: 20px'>" + @membership_fee.clinic.address + "</p> \
+      	<div>Vision Source Location Id:  \
+      	<span style='font-weight: bold'> " + @membership_fee.clinic.vsid + "</span> \
+        </div> \
+        <div>Vendor Id: \
+      	<span style='font-weight: bold'> " + @membership_fee.clinic.vendorid + "</span> \
+        </div> \
+        <hr>
+        <div>Receipts:  " + number_to_currency(@membership_fee.receipts) + "</div> \
+        <div style='padding-left: 20px'>Less Credit Card Processing Fee: " + number_to_currency(@membership_fee.creditcard) + "</div> \        
+        <div style='padding-left: 20px'>Less Refunds to Patients: " + number_to_currency(@membership_fee.refunds) + "</div> \        
+        <div style='padding-left: 20px'>Less Sales Tax Paid by Patient: " + number_to_currency(@membership_fee.tax) + "</div> \        
+        <div>Adjusted Gross Receipts: " + number_to_currency(@membership_fee.receipts - @membership_fee.creditcard - @membership_fee.refunds - @membership_fee.tax) + "</div> \        
+        <hr>
+        <div>Base Fee:  " + number_to_currency(@membership_fee.fee - @membership_fee.taxadd) + "</div> \
+        <div>Provincial Taxes:  " + number_to_currency(@membership_fee.taxadd) + "</div> \
+        <div style='font-weight: bold'>Membership Fee Due:  " + number_to_currency(@membership_fee.fee) + " </div>"
+        
+        distros = Distribution.all
+        recipients = Array.new
+        recipients[0] = {"email"=> @membership_fee.clinic.email, "type"=>"to"}
+        i = 1
+        distros.each do |d|
+          recipients[i] = {"email"=> d.email, "type"=>"cc"}
+          i = i + 1
+        end
+
+        message = {"html"=>body,
+             "text"=>"text email todo",
+             "subject"=>"Fee Submission for " + @membership_fee.month + ", " + @membership_fee.year.to_s,
+             "from_email"=>"fee-submissions@visionsourc.ca",
+             "from_name"=>"Vision Source Canada - Fees",
+             "to"=> recipients,
+             "headers"=>{"Reply-To"=>"fee-submissions@visionsourc.ca"},
+             "important"=>false,
+             "track_opens"=>nil,
+             "track_clicks"=>nil,
+             "auto_text"=>nil,
+             "auto_html"=>nil,
+             "inline_css"=>nil,
+             "url_strip_qs"=>nil,
+             "preserve_recipients"=>nil,
+             "view_content_link"=>nil,
+             "bcc_address"=>"dean.skelton@gmail.com",
+             "tracking_domain"=>nil,
+             "signing_domain"=>nil,
+             "return_path_domain"=>nil,
+             "metadata"=>{"website"=>"www.visionsource.ca"},
+             "recipient_metadata"=>
+                [{"rcpt"=>"dean.skelton@gmail.com", "values"=>{"user_id"=>123456}},
+                {"rcpt"=>"dean.skelton@fyidoctors.com", "values"=>{"user_id"=>123456}}]}
+                
+            async = false
+            ip_pool = "Main Pool"
+            send_at = nil
+            result = m.messages.send message, async, ip_pool, send_at
+
+            logger.debug(result)
+
         format.html { redirect_to @membership_fee, notice: 'Membership fee was successfully created.' }
         format.json { render action: 'show', status: :created, location: @membership_fee }
       else

@@ -1,4 +1,6 @@
 Vsmembership::Application.routes.draw do
+  resources :distributions
+
   resources :taxes
 
   resources :fees

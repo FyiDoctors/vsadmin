@@ -1,0 +1,10 @@
+.ui-container
+	%p#notice= notice
+
+	%p
+		%b Email:
+		= @distribution.email
+
+	= link_to 'Edit', edit_distribution_path(@distribution)
+	\|
+	= link_to 'Back', distributions_path
