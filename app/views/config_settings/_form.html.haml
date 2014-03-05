@@ -1,0 +1,16 @@
+= form_for @config_setting do |f|
+  - if @config_setting.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@config_setting.errors.count, "error")} prohibited this config_setting from being saved:"
+      %ul
+        - @config_setting.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :value
+    = f.text_field :value
+  .actions
+    = f.submit 'Save'

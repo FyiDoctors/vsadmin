@@ -78,7 +78,14 @@ class MembershipFeesController < ApplicationController
         
         distros = Distribution.all
         recipients = Array.new
-        recipients[0] = {"email"=> @membership_fee.clinic.email, "type"=>"to"}
+        mode = ConfigSetting.find(:first, :conditions=>["name= ?", "mode"])
+        if mode.value == "test"
+          email = ConfigSetting.find(:first, :conditions=>["name= ?", "email"])
+          recipients[0] = {"email"=> email.value, "type"=>"to"}
+        elsif mode == "prod"
+          recipients[0] = {"email"=> @membership_fee.clinic.email, "type"=>"to"}          
+        end
+
         i = 1
         distros.each do |d|
           recipients[i] = {"email"=> d.email, "type"=>"cc"}

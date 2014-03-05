@@ -72,8 +72,7 @@ class ClinicsController < ApplicationController
     def clinic_params
       params.require(:clinic).permit(:name, :address, :vendorid, :admin, :model_id, :email)
     end
-    
-    
+        
     def validate_user
       logged_in = session[:logged_in]
       logger.debug("validate user")

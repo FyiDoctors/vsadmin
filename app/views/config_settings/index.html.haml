@@ -1,0 +1,21 @@
+%h1 Listing config_settings
+
+%table
+  %tr
+    %th Name
+    %th Value
+    %th
+    %th
+    %th
+
+  - @config_settings.each do |config_setting|
+    %tr
+      %td= config_setting.name
+      %td= config_setting.value
+      %td= link_to 'Show', config_setting
+      %td= link_to 'Edit', edit_config_setting_path(config_setting)
+      %td= link_to 'Destroy', config_setting, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Config setting', new_config_setting_path
