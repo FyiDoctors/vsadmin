@@ -40,10 +40,14 @@ class MembershipFeesController < ApplicationController
   # POST /membership_fees.json
   def create
     @membership_fee = MembershipFee.new(membership_fee_params)
+    emailAddress = params[:clinic_email].to_s
+    
     @months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     @years = ["2013", "2014"]
     @feesA = Fee.where(:model_id => 1)
     @feesB = Fee.where(:model_id => 2)
+
+    @membership_fee.clinic.email = emailAddress
     
     respond_to do |format|
       if @membership_fee.save
@@ -78,12 +82,21 @@ class MembershipFeesController < ApplicationController
         
         distros = Distribution.all
         recipients = Array.new
-        mode = ConfigSetting.find(:first, :conditions=>["name= ?", "mode"])
-        if mode.value == "test"
+        mode = ConfigSetting.where(:name=>"mode")
+        logger.debug("MODE: " + mode.first.value)
+        if mode.first.value == "test"
+          logger.debug("TEST MODE")
           email = ConfigSetting.find(:first, :conditions=>["name= ?", "email"])
           recipients[0] = {"email"=> email.value, "type"=>"to"}
-        elsif mode == "prod"
-          recipients[0] = {"email"=> @membership_fee.clinic.email, "type"=>"to"}          
+        elsif mode.first.value == "prod"
+          logger.debug("PROD MODE")
+          if @membership_fee.clinic.email == ""
+            recipients[0] = {"email"=> distros.first.email, "type"=>"to"}                        
+            logger.debug("BLANK EMAIL: " + recipients[0].to_s)
+          else
+            recipients[0] = {"email"=> @membership_fee.clinic.email, "type"=>"to"}            
+            logger.debug("CLINIC EMAIL: " + recipients[0].to_s)
+          end
         end
 
         i = 1
@@ -120,8 +133,8 @@ class MembershipFeesController < ApplicationController
             async = false
             ip_pool = "Main Pool"
             send_at = nil
+            logger.debug(message.to_s)
             result = m.messages.send message, async, ip_pool, send_at
-
             logger.debug(result)
 
         format.html { redirect_to @membership_fee, notice: 'Membership fee was successfully created.' }

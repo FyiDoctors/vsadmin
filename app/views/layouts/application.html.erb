@@ -24,6 +24,21 @@
 
 		url = "/membership_fees.json?clinic=" + clinicId + "&month=" + month + "&year=" + year;
 
+		email = $("#clinic_email").val();
+		if(email != "") {
+			if(!isValidEmailAddress(email)) {
+				$.confirm({
+				    text: "You have entered an invalid email address. Please check your entry. If you do not want an email receipt sent then simply leave the field blank.",
+				    confirm: function(button) {
+						//
+				    },
+					confirmButton: "Ok",
+				});
+				
+				return false;
+			}
+		}
+		
 		$.ajax({
 		    type: "GET",
 		    url: url,    
@@ -31,7 +46,7 @@
 		    success: function(data){
 				if(data.length > 0) {
 					$.confirm({
-					    text: "A submission for the selected month already exists. Please verify you have entered the correct month. If you choose to continue we will override the previous submission. Do you wish to continue saving this form?<br/><br/><div style='font-weight: bold'>PLEASE NOTE:</div><br/>By clicking continue you hereby certify that the information being submitted is correct and accurate. ",
+					    text: "A submission for the selected month already exists. Please verify you have entered the correct month. If you choose to continue we will override the previous submission. Do you wish to continue saving this form?<br/><br/><div style='font-weight: bold'>PLEASE NOTE:</div><br/>By clicking continue you hereby certify that the information being submitted is correct and accurate.",
 					    confirm: function(button) {
 							$("#new_membership_fee").submit();
 					    },
@@ -171,6 +186,7 @@
 				    obj[i].label = obj[i].name;
 				    obj[i].clinic_id = obj[i].id;
 					obj[i].province = obj[i].province;
+					obj[i].email = obj[i].email
 
 				    delete obj[i].name;
 				    delete obj[i].id;
@@ -204,6 +220,8 @@
 								$("#override-link").hide();
 							}
 							
+							
+							$("#clinic_email").val(ui.item.email)
 							$("#clinic-display-box").show();
 							$("#clinic-display").text(ui.item.label);
 							$("#clinic-select").hide();

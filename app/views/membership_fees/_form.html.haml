@@ -102,6 +102,12 @@
 						#membership-fee.bold
 							0.00
 						= f.text_field :fee, :class=>"money-input", :class=>"money-input hidden"
+				%tr
+					%td.bold
+						Email receipt to
+					%td.fee-td
+						#membership-fee.bold
+							= text_field_tag "clinic_email"
 
 		%br		
 		= f.submit 'Save Fees', :id=>"saveButton", :class=>"btn btn-custom", :style=>"width: 200px;"

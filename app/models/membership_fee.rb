@@ -3,6 +3,8 @@ class MembershipFee < ActiveRecord::Base
   before_save :default_values
   validates :clinic_id, presence: true
   
+  accepts_nested_attributes_for :clinic
+  
   def clinic_name 
     clinic.name if clinic
   end

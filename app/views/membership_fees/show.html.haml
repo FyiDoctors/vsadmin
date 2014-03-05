@@ -92,6 +92,13 @@
 				%td
 					#membership-fee.bold
 						= number_to_currency(@membership_fee.fee)
+	- if @membership_fee.clinic.email != ""
+		%br
+		%p
+			An email has been sent to 
+			%span.bold 
+				= @membership_fee.clinic.email
+				
 	%br
 	%br
 	=link_to "Print Page", "javascript:window.print();return false;", :class=>"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only print-hidden"
