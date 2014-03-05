@@ -150,11 +150,13 @@ p, ol, ul, td {
 	padding: 20px;
 	
 }
+
 .fee-data {
 	padding-top: 15px;
 	border-top: 1px solid #ABABAB;
 	position: relative;
 }
+
 .fee-overlay {
 	position: absolute;
 	top: 20px;
