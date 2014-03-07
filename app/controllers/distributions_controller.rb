@@ -1,6 +1,7 @@
 class DistributionsController < ApplicationController
   before_action :set_distribution, only: [:show, :edit, :update, :destroy]
   #before_action :validate_user
+  layout "admin"
 
   # GET /distributions
   # GET /distributions.json

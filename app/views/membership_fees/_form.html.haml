@@ -1,7 +1,8 @@
 .fee-container
 	%h2 Membership Fees
 
-	%h5 Please enter the following data to compute the montly membership fee due. 
+	%h5 Please enter the following data to compute the monthly membership fee due. 
+	%h5 If you are having any difficulties, please use the feedback button on the left of the page.
 	%br
 	= form_for @membership_fee do |f|
 		- if @membership_fee.errors.any?
@@ -110,7 +111,7 @@
 							= text_field_tag "clinic_email"
 
 		%br		
-		= f.submit 'Save Fees', :id=>"saveButton", :class=>"btn btn-custom", :style=>"width: 200px;"
+		= f.submit 'Save Fees', :id=>"saveButton", :class=>"confirm btn btn-primary", :style=>"width: 200px;"
 	%h3 
 		Fee Schedule
 	= render partial: "fees", :locals => {:fees => @feesA, :display=>"none", :id=>1}	

@@ -27,12 +27,9 @@ var taxRate;
 var selectedIndex = 0;
 var overrideRow1 = 0;
 var overrideRow2 = 0;
+var feedback;
 
 history.navigationMode = 'compatible';
-
-$(document).ready(function() {
-
-});
 
 function validateFrom() {
 	return false;

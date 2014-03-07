@@ -1,5 +1,6 @@
 class FeesController < ApplicationController
   before_action :set_fee, only: [:show, :edit, :update, :destroy]
+  layout "admin"
 
   # GET /fees
   # GET /fees.json

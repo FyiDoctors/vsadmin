@@ -1,4 +1,6 @@
 Vsmembership::Application.routes.draw do
+  resources :feedbacks
+
   resources :config_settings
 
   resources :distributions

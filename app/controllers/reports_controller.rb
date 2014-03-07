@@ -1,7 +1,8 @@
 class ReportsController < ApplicationController
   autocomplete :clinic, :name, :full => true
   before_action :validate_user
-
+  layout "admin"
+  
   def index
     @clinics = Clinic.all
     @months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]

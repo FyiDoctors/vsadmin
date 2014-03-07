@@ -12,6 +12,7 @@
  *= require_self
  *= require_tree .
  *= require jquery-ui/ui-lightness
+ *= require font-awesome
  */
 
 @font-face {
@@ -329,4 +330,24 @@ input {
 	height: 16px;
 	cursor: pointer;
 	float: right;
+}
+
+#feedback-link {
+	width: 140px;
+	height: 30px;
+	position: absolute;
+	text-align: center;
+	font-size: 18px;
+	padding-top: 5px;
+	border-radius: 10px 10px 0 0;
+	font-weight: bold;
+	cursor: pointer;
+	top: 200px;
+	left: -55px;
+	background-color: #FFF;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
 }

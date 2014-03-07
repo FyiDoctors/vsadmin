@@ -1,6 +1,7 @@
 class ConfigSettingsController < ApplicationController
   before_action :set_config_setting, only: [:show, :edit, :update, :destroy]
-  #before_action :validate_user
+  before_action :validate_user
+  layout "admin"
 
   # GET /config_settings
   # GET /config_settings.json

@@ -1,5 +1,6 @@
 class SecuritiesController < ApplicationController
   before_action :set_security, only: [:show, :edit, :update, :destroy]
+  layout "admin"
 
 
   # GET /securities

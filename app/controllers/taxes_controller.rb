@@ -1,5 +1,6 @@
 class TaxesController < ApplicationController
   before_action :set_tax, only: [:show, :edit, :update, :destroy]
+  layout "admin"
 
   # GET /taxes
   # GET /taxes.json

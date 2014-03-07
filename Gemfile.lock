@@ -40,6 +40,8 @@ GEM
     erubis (2.7.0)
     excon (0.32.0)
     execjs (2.0.2)
+    font-awesome-rails (4.0.3.1)
+      railties (>= 3.2, < 5.0)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -138,6 +140,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   coffee-rails (~> 4.0.0)
+  font-awesome-rails
   haml-rails
   jbuilder (~> 1.2)
   jquery-rails

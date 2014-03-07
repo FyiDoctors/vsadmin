@@ -18,6 +18,12 @@
 
 	var clinics;
 	var clinicId;
+	$(document).ready(function() {
+
+	});
+	$(window).load(function() {
+		fb = $(document.body).feedback({});
+	});
 	$("#saveButton").click(function(e) {
 		month = $("#membership_fee_month option:selected").text()
 		year = $("#membership_fee_year option:selected").text()
@@ -68,7 +74,8 @@
 					    },
 						confirmButton: "Continue",
 						cancelButton: "Cancel"
-					});				}
+					});	
+				}
 		    },
 			
 		  });
@@ -76,7 +83,7 @@
 
 		return false;
 	});
-	
+		
 	$("#new_membership_fee :input").on("keypress", function(e) {
 	    return e.keyCode != 13;
 	});
