@@ -43,7 +43,8 @@ class SecuritiesController < ApplicationController
           format.html { redirect_to reports_path}
         end
       else
-        format.html { redirect_to root_path }
+        flash[:error] = 'The password you entered was invalid. Please try again.'
+        format.html { redirect_to root_path}
         format.json { render json: @security.errors, status: :unprocessable_entity }
       end
     end

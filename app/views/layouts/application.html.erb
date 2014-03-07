@@ -23,6 +23,23 @@
 	});
 	$(window).load(function() {
 		fb = $(document.body).feedback({});
+		
+		var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+		var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+		if (is_safari && !is_chrome) {
+			$.confirm({
+			    text: "Sorry but we are currently having some difficulty supporting the Safari browser. We are working on it and plan to have a solution shorlty. Please use either Chrome, Firefox or Internet Explorer for the time being.",
+			    confirm: function(button) {
+					//
+			    },
+				confirmButton: "Ok",
+			});
+
+			$("#security_secret").attr('disabled','disabled');
+			$("#loginButton").attr('disabled','disabled');
+			
+		}
+
 	});
 	$("#saveButton").click(function(e) {
 		month = $("#membership_fee_month option:selected").text()
