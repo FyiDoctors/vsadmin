@@ -1,7 +1,12 @@
 (function($) {
 
     $.feedback = function(element, options) {
-
+		$(function() {
+			jQuery.support.placeholder = false;
+			test = document.createElement('input');
+			if('placeholder' in test) jQuery.support.placeholder = true;
+		});
+		
         var defaults = {
             foo: 'bar',
             onFoo: function() {}
@@ -39,6 +44,10 @@
 					backgroundColor: "#000"
 				}
 			})
+			var formHeight = "370px";
+			if(!$.support.placeholder) {
+				formHeight = "420px";
+			}
 
 			plugin.formBox = $("<div />", {
 				"id" : "feedback-form",
@@ -54,7 +63,7 @@
 					marginBottom: "auto",
 					marginTop: "auto",
 					width: "400px",
-					height: "370px",
+					height: formHeight,
 					backgroundColor: "#FFF",
 					borderRadius: "5px"
 				}
@@ -114,7 +123,16 @@
 			}).click(function() {
 				highlightButton($(this), "PRAISE");
 			}).text("Praise").appendTo(plugin.reasons);
-						
+										
+			if(!$.support.placeholder) {
+				$("<p/>", {
+					id : "feedback-label",
+					css: {
+						paddingLeft: "10px"
+					}
+				}).text("Your Feedback").appendTo(plugin.formBox);
+			}
+	
 			plugin.feedbackText = $("<textarea/>", {
 				id : "feedback-text",
 				rows : "4",
@@ -125,6 +143,15 @@
 				}
 			}).appendTo(plugin.formBox);
 
+			if(!$.support.placeholder) {
+				$("<p/>", {
+					id : "email-label",
+					css: {
+						paddingLeft: "10px"
+					}
+				}).text("Email Address").appendTo(plugin.formBox);
+			}
+			
 			plugin.email = $("<input/>", {
 				id : "feedback-email",
 				type : "text",
