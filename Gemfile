@@ -12,6 +12,7 @@ gem 'rails4-autocomplete'
 gem 'rails_12factor', group: :production
 gem 'mandrill-api'
 gem "font-awesome-rails"
+gem "ie_iframe_cookies"
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

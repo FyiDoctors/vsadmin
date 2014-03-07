@@ -31,7 +31,6 @@ class ReportsController < ApplicationController
       
       logger.debug(startDate)
       @memeber_fees = MembershipFee.where(:created_at => startDate .. endDate)
-      
     end
     
     respond_to do |format|
