@@ -76,6 +76,7 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.4)
     multi_xml (0.5.5)
+    newrelic_rpm (3.7.3.199)
     pg (0.17.1)
     polyglot (0.3.3)
     rack (1.5.2)
@@ -149,6 +150,7 @@ DEPENDENCIES
   jquery-ui-rails
   jquery-ui-themes
   mandrill-api
+  newrelic_rpm
   pg
   rails
   rails4-autocomplete
