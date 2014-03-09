@@ -8,5 +8,95 @@
 </head>
 <body>
 <%= yield %>
+
+<script>
+
+	var clinics;
+	var clinicId;
+	$(document).ready(function() {
+
+	});
+	$(window).load(function() {
+		$('#year_id').change(function (e) {
+			updateMonthLink();
+		})
+		$('#month_id').change(function (e) {
+			updateMonthLink();
+		})
+		
+		if ($("#membership_fee_clinic").val() != null) {
+			$.ajax({
+			    type: "GET",
+			    url: "/clinics",    
+			    dataType: "json",
+			    success: function(data){
+					clinics=data;
+				    var obj = clinics;
+					for (var i = 0; i<obj.length; i++) {
+					    obj[i].label = obj[i].name;
+					    obj[i].clinic_id = obj[i].id;
+						obj[i].province = obj[i].province;
+						obj[i].email = obj[i].email
+
+					    delete obj[i].name;
+					    delete obj[i].id;
+						delete obj[i].url;
+						delete obj[i].doctor;
+					}
+					$( "#membership_fee_clinic" ).autocomplete({
+					      minLength: 0,
+					      source: obj,
+						select: function( event, ui ) {
+							clinicId = ui.item.clinic_id;
+							$("#membership_fee_clinic_id").val(ui.item.clinic_id);
+							$( "#membership_fee_clinic" ).val(ui.item.label );					
+
+							if (clinicId > 0) {	
+								$("#clinic-link").attr("href", "/reports/show?mode=clinic&clinic="+ui.item.clinic_id);
+								$("#fee_table_1").hide();																
+								$("#fee_table_2").hide();
+								$("#fee_table_" + ui.item.model_id).show();
+								$(".fee-overlay").hide();
+								$("#override-link").show();
+								$("#saveButton").show();
+								if(ui.item.model_id == 1)
+									fees = fees_1;
+								else
+									fees = fees_2;	
+								if(ui.item.admin == true) {
+									$("#override-link").show();
+								}
+								else {
+									$("#override-link").hide();
+								}
+
+
+								$("#clinic_email").val(ui.item.email)
+								$("#clinic-display-box").show();
+								$("#clinic-display").text(ui.item.label);
+								$("#clinic-select").hide();
+
+								$("#membership_fee_month").focus();
+
+								getTaxRecord(ui.item.province)
+
+								processFees();
+							} else {
+								$("#clinic-link").attr("href", "javascript:alert('Make sure you select a clinic.')");
+							}
+
+						 }
+					})
+					.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+					      return $( "<li>" )
+					        .append( "<a>" + item.label + "<br><span style='font-size: 10px'>Vision Source ID: " + item.vsid + " - " + item.address + "</span></a>" )
+					        .appendTo( ul );
+					};
+
+			    }
+			  });
+			}
+	});
+</script>
 </body>
 </html>
