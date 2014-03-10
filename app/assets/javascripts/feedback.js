@@ -183,7 +183,7 @@
 			}).click(function(){
 				if(isValidEmailAddress(plugin.email.val())) {
 					
-					feedback = {feedback: {content: plugin.feedbackText.val(), feedback_type: plugin.feedbackType, email: plugin.email.val()}};
+					feedback = {feedback: {content: plugin.feedbackText.val(), feedback_type: plugin.feedbackType, email: plugin.email.val(), browser: navigator.appName + " : " + navigator.appVersion}};
 
 					$.ajax({
 					        type: "POST",

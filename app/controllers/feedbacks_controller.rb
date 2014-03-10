@@ -38,7 +38,8 @@ class FeedbacksController < ApplicationController
         <br> \
         <p>From: " + @feedback.email + "</p> \
         <p>Type: " + @feedback.feedback_type + "</p> \
-        <p>Conten: " + @feedback.content + "</p> \
+        <p>Content: " + @feedback.content + "</p> \
+        <p>Browser: " + @feedback.browser + "</p> \
         <br>"
         
         distros = Distribution.all
@@ -121,6 +122,6 @@ class FeedbacksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feedback_params
-      params.require(:feedback).permit(:content, :feedback_type, :email)
+      params.require(:feedback).permit(:content, :feedback_type, :email, :browser)
     end
 end

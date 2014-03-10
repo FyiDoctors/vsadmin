@@ -5,6 +5,7 @@
     %th Content
     %th Feedback type
     %th Email
+	%th Browser
     %th
     %th
     %th
@@ -14,6 +15,7 @@
       %td= feedback.content
       %td= feedback.feedback_type
       %td= feedback.email
+      %td= feedback.browser
       %td= link_to 'Show', feedback
       %td= link_to 'Edit', edit_feedback_path(feedback)
       %td= link_to 'Destroy', feedback, :method => :delete, :data => { :confirm => 'Are you sure?' }
