@@ -4,4 +4,4 @@ Vsmembership::Application.config.session_store :cookie_store, key: '_vsmembershi
 
 Vsmembership::Application.config.session_store :cookie_store, 
    :key => '_my_session', 
-   :expire_after => 10.minutes
+   :expire_after => 1.month
