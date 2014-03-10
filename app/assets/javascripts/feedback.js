@@ -44,9 +44,9 @@
 					backgroundColor: "#000"
 				}
 			})
-			var formHeight = "370px";
+			var formHeight = "380px";
 			if(!$.support.placeholder) {
-				formHeight = "420px";
+				formHeight = "430px";
 			}
 
 			plugin.formBox = $("<div />", {
@@ -222,6 +222,14 @@
 				plugin.formBox.hide();
 			}).appendTo(plugin.feedbackFooter);
 			
+			$("<div />", {
+				id : "browser-version",
+				css : {
+					fontSize: "9px",
+					lineHeight: "10px",
+					paddingTop: "3px"
+				}
+			}).text(navigator.appName + " : " + navigator.appVersion).appendTo(plugin.feedbackFooter);
 			
 			plugin.feedbackTab = $("<div />", {
 				"id" : "feedback-link"
