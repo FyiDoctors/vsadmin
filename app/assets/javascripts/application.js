@@ -208,7 +208,11 @@ function showBrowsers() {
 		<div style='padding-left: 20px'><span style='font-weight: bold;'>Safari: Not supported at this time</span></div> \
 		<div style='padding-left: 20px'><span style='font-weight: bold;'>Opera: Not supported at this time</span></div> \
 		<br/> \
-		<div>Recommended: <span style='font-weight: bold;'>Chrome, Firefox or Internet Explorer Version 10</span></div>"
+		<div>Recommended: <span style='font-weight: bold;'>Chrome, Firefox or Internet Explorer Version 10</span></div> \
+		<br/> \
+		<div><span style='font-weight: bold;'>NOTE</span>: If you are unable to use any of these browsers please send us a message using the feedback button on the page and we will work to get you up and running.</div> \
+		<br/>";
+		
 	$.confirm({
 	    text: message,
 	    confirm: function(button) {
