@@ -199,3 +199,23 @@ function isValidEmailAddress(emailAddress) {
     return pattern.test(emailAddress);
 };
 
+function showBrowsers() {
+	message = "<h4>Supported Browswers</h4> \
+		<br/> \
+		<div style='padding-left: 20px'><span style='font-weight: bold;'>Internet Explorer</span>: Version 9 and above</div> \
+		<div style='padding-left: 20px'><span style='font-weight: bold;'>Chrome: Latest version or one version back</span></div> \
+		<div style='padding-left: 20px'><span style='font-weight: bold;'>Firefox: Latest version or one version back</span></div> \
+		<div style='padding-left: 20px'><span style='font-weight: bold;'>Safari: Not supported at this time</span></div> \
+		<div style='padding-left: 20px'><span style='font-weight: bold;'>Opera: Not supported at this time</span></div> \
+		<br/> \
+		<div>Recommended: <span style='font-weight: bold;'>Chrome, Firefox or Internet Explorer Version 10</span></div>"
+	$.confirm({
+	    text: message,
+	    confirm: function(button) {
+			//
+	    },
+		confirmButton: "Ok",
+	});
+	
+}
+

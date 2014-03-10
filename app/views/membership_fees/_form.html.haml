@@ -2,7 +2,10 @@
 	%h2 Membership Fees
 
 	%h5 Please enter the following data to compute the monthly membership fee due. 
-	%h5 If you are having any difficulties, please use the feedback button on the left of the page.
+	%h5 
+		If you are having any difficulties, please use the feedback button on the left of the page. Also check out the list of 
+		%a{:href=>"javascript:showBrowsers()"}
+			supported browsers.
 	%br
 	= form_for @membership_fee do |f|
 		- if @membership_fee.errors.any?
