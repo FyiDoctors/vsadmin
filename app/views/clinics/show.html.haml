@@ -19,6 +19,15 @@
 	%p
 		%b Email:
 		= @clinic.email
+	%p
+		%b Province:
+		= @clinic.province
+	%p
+		%b VSID:
+		= @clinic.vsid
+	%p
+		%b VSVENDORID:
+		= @clinic.vsvendorid
 
 	= link_to 'Edit', edit_clinic_path(@clinic)
 	\|

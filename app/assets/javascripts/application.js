@@ -104,7 +104,7 @@ function processFees() {
 		$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).removeClass("rowOn");
 		selectedIndex = fees.length-1;
 		$("#fee-row-" + fees[selectedIndex].model_id + "-" + fees[selectedIndex].id).addClass("rowOn");
-		$("#ptaxes").text(taxAdd.toFixed(2));
+		$("#taxes").text(taxAdd.toFixed(2));
 		$('#membership_fee_taxadd').val(taxAdd.toFixed(2));
 						
 		return;
@@ -214,11 +214,8 @@ function showBrowsers() {
 		<br/>";
 		
 	$.confirm({
-	    text: message,
-	    confirm: function(button) {
-			//
-	    },
-		confirmButton: "Ok",
+	  text: message,
+	  confirmButton: "Ok"
 	});
 	
 }

@@ -31,11 +31,19 @@
 			Fee + Taxes
 		%td.report-header
 			Date Received
+		%td.report-header
+			Status
 
 	- feeArray.each do |fee|
-		%tr
+		%tr{:id=>"table_row_" + fee.id.to_s }
 			%td
-				= link_to "View", "/membership_fees/" + fee.id.to_s
+				= link_to "View", "/membership_fees/" + fee.id.to_s, :id=>"view_button_" + fee.id.to_s, :class=>"item-view-button"
+				-if @status == 'inactive'
+					= link_to "Restore", "javascript:restoreFee(#{fee.id});", :id=>"del_button_" + fee.id.to_s, 	:class=>"item-view-button"
+				-else
+					= link_to "Remove", "javascript:removeFee(#{fee.id});", :id=>"del_button_" + fee.id.to_s, :class=>"item-view-button"
+				= link_to "Save", "javascript:saveDates(#{fee.id});", :id=>"save_button_" + fee.id.to_s, :class=>"date-save-button"
+				= link_to "Cancel", "javascript:cancelEdit(#{fee.id});", :id=>"cancel_button_" + fee.id.to_s, :class=>"date-cancel-button"
 			%td
 				= fee.clinic.vendorid
 			%td
@@ -44,10 +52,19 @@
 				= fee.clinic.name
 			%td
 				= fee.clinic.address
-			%td
-				= fee.month 
-			%td
-				= fee.year			
+			- logger.debug("LOOKING FOR: " + @months.to_s)
+			%td{:id=>fee.id.to_s + "_month", :class=>"month-edit-toggle", :data => {:id => fee.id, :month=>fee.month } }
+				.date-label{:id=>fee.id.to_s + "_lbl_month"}
+					= fee.month 
+				.date-form-field{:id=>fee.id.to_s + "_form_month"}
+					= select_tag 'month', options_for_select(@months, fee.month), :id=>"month_select_" + fee.id.to_s, :class=>"month_select"
+				
+			%td{:id=>fee.id.to_s + "_year", :class=>"year-edit-toggle", :data => {:id => fee.id, :year=>fee.year }}
+				.date-label{:id=>fee.id.to_s + "_lbl_year"}
+					= fee.year		
+				.date-form-field{:id=>fee.id.to_s + "_form_year"}
+					= select_tag 'year', options_for_select(@years, fee.year), :id=>"year_select_" + fee.id.to_s, :class=>"year_select"
+					
 			%td
 				= number_with_precision(fee.receipts, precision: 2)			
 			%td
@@ -68,3 +85,5 @@
 				= number_with_precision((fee.fee), precision: 2)
 			%td
 				= fee.created_at
+			%td
+				= fee.record_status

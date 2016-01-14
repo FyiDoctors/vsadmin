@@ -6,22 +6,29 @@ class ReportsController < ApplicationController
   def index
     @clinics = Clinic.all
     @months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    @years = ["2013", "2014"]
+    @years = ["2013", "2014", "2015", "2016"]
     
   end
   
   def show
     @mode = params[:mode]
+    @months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    @years = ["2013", "2014", "2015", "2016"]
+    if params[:status] != nil
+      @status = params[:status]
+    else
+      @status = "active"
+    end
     logger.debug("MODE: " + @mode)
     if @mode == "clinic"
       clinic_id = params[:clinic]
       @clinic = Clinic.find(clinic_id)
-      @memeber_fees = MembershipFee.where(:clinic_id => @clinic.id)
+      @memeber_fees = MembershipFee.where(:clinic_id => @clinic.id, :record_status => @status).order(:created_at)
       logger.debug("results: " + @memeber_fees.count.to_s)
     elsif @mode == "month"
       @month = params[:month]
       @year = params[:year]
-      @memeber_fees = MembershipFee.where(:month => @month, :year => @year)
+      @memeber_fees = MembershipFee.where(:month => @month, :year => @year, :record_status => @status)
     elsif @mode == "submit"
       @month = params[:month]
       @year = params[:year]
@@ -30,7 +37,7 @@ class ReportsController < ApplicationController
       endDate = startDate.to_time.advance(:months => 1).to_date
       
       logger.debug(startDate)
-      @memeber_fees = MembershipFee.where(:created_at => startDate .. endDate)
+      @memeber_fees = MembershipFee.where(:created_at => startDate .. endDate, :record_status => @status)
     end
     
     respond_to do |format|

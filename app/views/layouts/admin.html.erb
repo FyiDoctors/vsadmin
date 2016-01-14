@@ -14,7 +14,36 @@
 	var clinics;
 	var clinicId;
 	$(document).ready(function() {
+		$(".month-edit-toggle").click(function(e) {
+			var id = $(this).attr("data-id");
+			var month = $(this).attr("data-month");
+			var year = $("#" + id + "_year").text();
+			
+			$("#" + id + "_form_month").show();
+			$("#" + id + "_form_year").show();
+			$("#" + id + "_lbl_month").hide();
+			$("#" + id + "_lbl_year").hide();
+			$("#save_button_" + id).show();
+			$("#cancel_button_" + id).show();
+			$("#view_button_" + id).hide();
+		});
+		$(".year-edit-toggle").click(function() {
+			var id = $(this).attr("data-id");
+			var month = $("#" + id + "_month").text();
+			var year = $(this).attr("data-year");
 
+			$("#" + id + "_form_month").show();
+			$("#" + id + "_form_year").show();
+			$("#" + id + "_lbl_month").hide();
+			$("#" + id + "_lbl_year").hide();
+			$("#save_button_" + id).show();
+			$("#cancel_button_" + id).show();
+			$("#view_button_" + id).hide();
+			
+		});
+		$(".month_select").click(function() {
+			
+		});
 	});
 	$(window).load(function() {
 		$('#year_id').change(function (e) {
@@ -96,7 +125,86 @@
 			    }
 			  });
 			}
+
 	});
+	
+	function removeFee(id) {
+		var _id = id
+		//PUT	 /membership_fees/:id(.:format)	 membership_fees#update
+		var udpateStr = {membership_fee: {record_status: "inactive"}};
+		$.ajax({
+		    url: "/membership_fees/" + id,
+		    type: 'PUT',
+		    data: JSON.stringify(udpateStr),
+	        contentType: "application/json; charset=utf-8",
+		    dataType: 'application/json',
+	        statusCode: {
+			    200: function() {
+					$("#table_row_" + _id).fadeOut(400)
+			    }
+			  }
+		});
+		
+	}
+	
+	function restoreFee(id) {
+		var _id = id
+		//PUT	 /membership_fees/:id(.:format)	 membership_fees#update
+		var udpateStr = {membership_fee: {record_status: "active"}};
+		$.ajax({
+		    url: "/membership_fees/" + id,
+		    type: 'PUT',
+		    data: JSON.stringify(udpateStr),
+	        contentType: "application/json; charset=utf-8",
+		    dataType: 'application/json',
+	        statusCode: {
+			    200: function() {
+					$("#table_row_" + _id).fadeOut(400)
+			    }
+			  }
+		});
+		
+	}
+
+	function saveDates(id) {
+		var _month = $("#month_select_" + id).find(":selected").val();
+		var _year = $("#year_select_" + id).find(":selected").val();
+		var _id = id
+		//PUT	 /membership_fees/:id(.:format)	 membership_fees#update
+		var udpateStr = {membership_fee: {month: _month, year: _year}};
+		
+		$.ajax({
+		    url: "/membership_fees/" + id,
+		    type: 'PUT',
+		    data: JSON.stringify(udpateStr),
+	        contentType: "application/json; charset=utf-8",
+		    dataType: 'application/json',
+	        statusCode: {
+			    200: function() {
+					$("#" + _id + "_form_month").hide();
+					$("#" + _id + "_form_year").hide();
+					$("#" + _id + "_lbl_month").text(_month);
+					$("#" + _id + "_lbl_year").text(_year);
+					$("#" + _id + "_lbl_month").show();
+					$("#" + _id + "_lbl_year").show();
+					$("#save_button_" + _id).hide();
+					$("#cancel_button_" + _id).hide();
+					$("#view_button_" + _id).show();
+					
+			    }
+			  }
+		});
+	}
+	
+	function cancelEdit(id) {
+		$("#" + id + "_form_month").hide();
+		$("#" + id + "_form_year").hide();
+		$("#" + id + "_lbl_month").show();
+		$("#" + id + "_lbl_year").show();
+		$("#save_button_" + id).hide();
+		$("#cancel_button_" + id).hide();
+		$("#view_button_" + id).show();		
+	}
 </script>
 </body>
 </html>

@@ -27,13 +27,27 @@ class MembershipFeesController < ApplicationController
     @membership_fee = MembershipFee.new
     @clinics = Clinic.all
     @months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    @years = ["2013", "2014"]
+    @years = ["2013", "2014", "2015", "2016"]
     @feesA = Fee.where(:model_id => 1)
     @feesB = Fee.where(:model_id => 2)
   end
 
   # GET /membership_fees/1/edit
   def edit
+  end
+
+  # PATCH/PUT /membership_fees/1
+  # PATCH/PUT /membership_fees/1.json
+  def update
+    respond_to do |format|
+      if @membership_fee.update(membership_fee_params)
+        format.html { render action: 'index', status: 200 }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @membership_fee.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /membership_fees
@@ -154,7 +168,7 @@ class MembershipFeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def membership_fee_params
-      params.require(:membership_fee).permit(:receipts, :creditcard, :refunds, :tax, :year, :fee, :month, :checknumber, :clinic_id, :taxadd)
+      params.require(:membership_fee).permit(:receipts, :creditcard, :refunds, :tax, :year, :fee, :month, :checknumber, :clinic_id, :taxadd, :record_status)
     end
     
     def validate_user
