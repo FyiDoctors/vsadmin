@@ -1,0 +1,17 @@
+{
+  "name": "vsadmin",
+  "scripts": {
+  },
+  "env": {
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    }
+  },
+  "addons": [
+    "heroku-postgresql",
+    "mandrill"
+  ]
+}
