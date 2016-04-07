@@ -122,10 +122,10 @@ class MembershipFeesController < ApplicationController
         message = {"html"=>body,
              "text"=>"text email todo",
              "subject"=>"Fee Submission for " + @membership_fee.month + ", " + @membership_fee.year.to_s,
-             "from_email"=>"noreply@visionsourcefees.com",
+             "from_email"=>"fee-submissions@visionsource.ca",
              "from_name"=>"Vision Source Canada - Fees",
              "to"=> recipients,
-             "headers"=>{"Reply-To"=>"noreply@visionsourcefees.com"},
+             "headers"=>{"Reply-To"=>"fee-submissions@visionsource.ca"},
              "important"=>false,
              "track_opens"=>nil,
              "track_clicks"=>nil,
@@ -135,13 +135,13 @@ class MembershipFeesController < ApplicationController
              "url_strip_qs"=>nil,
              "preserve_recipients"=>nil,
              "view_content_link"=>nil,
-             "bcc_address"=>nil,
+             "bcc_address"=>"michael.vandenheever@fyidoctors.com",
              "tracking_domain"=>nil,
              "signing_domain"=>nil,
              "return_path_domain"=>nil,
              "metadata"=>{"website"=>"www.visionsource.ca"},
              "recipient_metadata"=>
-                [{"rcpt"=>"Aleksandra.Cekic@visionsource.ca", "values"=>{"user_id"=>123456}},
+                [{"rcpt"=>"dean.skelton@fyidoctors.com", "values"=>{"user_id"=>123456}},
                 {"rcpt"=>"michael.vandenheever@fyidoctors.com", "values"=>{"user_id"=>123456}}]}
                 
             async = false
