@@ -122,10 +122,10 @@ class MembershipFeesController < ApplicationController
         message = {"html"=>body,
              "text"=>"text email todo",
              "subject"=>"Fee Submission for " + @membership_fee.month + ", " + @membership_fee.year.to_s,
-             "from_email"=>"fee-submissions@visionsourc.ca",
+             "from_email"=>"fee-submissions@visionsource.ca",
              "from_name"=>"Vision Source Canada - Fees",
              "to"=> recipients,
-             "headers"=>{"Reply-To"=>"fee-submissions@visionsourc.ca"},
+             "headers"=>{"Reply-To"=>"fee-submissions@visionsource.ca"},
              "important"=>false,
              "track_opens"=>nil,
              "track_clicks"=>nil,
@@ -142,7 +142,7 @@ class MembershipFeesController < ApplicationController
              "metadata"=>{"website"=>"www.visionsource.ca"},
              "recipient_metadata"=>
                 [{"rcpt"=>"dean.skelton@gmail.com", "values"=>{"user_id"=>123456}},
-                {"rcpt"=>"dean.skelton@fyidoctors.com", "values"=>{"user_id"=>123456}}]}
+                {"rcpt"=>"michael.vandenheever@fyidoctors.com", "values"=>{"user_id"=>123456}}]}
                 
             async = false
             ip_pool = "Main Pool"
