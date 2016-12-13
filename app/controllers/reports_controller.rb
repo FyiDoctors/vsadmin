@@ -6,14 +6,14 @@ class ReportsController < ApplicationController
   def index
     @clinics = Clinic.all
     @months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    @years = ["2013", "2014", "2015", "2016"]
+    @years = ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"]
     
   end
   
   def show
     @mode = params[:mode]
     @months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    @years = ["2013", "2014", "2015", "2016"]
+    @years = ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"]
     if params[:status] != nil
       @status = params[:status]
     else
